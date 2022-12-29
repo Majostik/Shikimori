@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Shikimori"
+include ':shikimori'
+include ':common'
+include ':common:dagger'
+include ':common:android'
+include ':common:common'
+include ':common:android'
+include ':app'
+include ':app:animelist'
+include ':common:retrofit'
+include ':common:compose'
+include ':api'
+include ':api:animelist'
+includeBuild("build-logic")

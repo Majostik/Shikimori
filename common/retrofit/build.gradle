@@ -1,0 +1,9 @@
+plugins {
+    id("convention.android-library")
+    id("convention.dagger")
+}
+
+dependencies {
+    api(libs.retrofit)
+    api(libs.retrofit.converter.gson)
+}

@@ -1,0 +1,13 @@
+plugins {
+    id("convention.android-library")
+    id("convention.dagger")
+    id("convention.compose")
+}
+
+dependencies {
+    implementation(project(':api:animelist'))
+    implementation(project(':common:dagger'))
+    implementation(project(':common:android'))
+    implementation(libs.glide)
+    implementation(libs.coilCompose)
+}
