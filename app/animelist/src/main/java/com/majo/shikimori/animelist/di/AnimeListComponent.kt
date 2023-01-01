@@ -7,7 +7,8 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(
-    dependencies = [AnimeListDependencies::class]
+    dependencies = [AnimeListDependencies::class],
+    modules = [AnimeListModule::class]
 )
 @PerActivity
 interface AnimeListComponent {

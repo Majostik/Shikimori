@@ -1,5 +1,6 @@
 package com.majo.shikimori.di.module
 
+import com.majo.shikimori.anime_details.di.AnimeDetailsDependencies
 import com.majo.shikimori.animelist.di.AnimeListDependencies
 import com.majo.shikimori.dagger.ComponentDependencies
 import com.majo.shikimori.dagger.ComponentDependenciesKey
@@ -16,5 +17,9 @@ abstract class DependenciesModule private constructor(){
     @ComponentDependenciesKey(AnimeListDependencies::class)
     abstract fun provideAnimeFactsDependencies(component: AppComponent): ComponentDependencies
 
+    @Binds
+    @IntoMap
+    @ComponentDependenciesKey(AnimeDetailsDependencies::class)
+    abstract fun provideAnimeDetailsDependencies(component: AppComponent): ComponentDependencies
 
 }
