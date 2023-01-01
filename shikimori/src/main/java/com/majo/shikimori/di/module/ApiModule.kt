@@ -1,6 +1,7 @@
 package com.majo.shikimori.di.module
 
 import com.google.gson.Gson
+import com.majo.anime_details.di.AnimeDetailsApiModule
 import com.majo.shikimori.animelist.di.AnimeListApiModule
 import com.majo.shikimori.retrofit.RetrofitFactory
 import com.majo.shikimori.retrofit.RetrofitFactoryImpl
@@ -16,6 +17,7 @@ import javax.inject.Singleton
     includes = [
         ApiModule.Deps::class,
         AnimeListApiModule::class,
+        AnimeDetailsApiModule::class
     ]
 )
 object ApiModule {

@@ -26,3 +26,7 @@ include ':common:compose'
 include ':api'
 include ':api:animelist'
 includeBuild("build-logic")
+include ':common:mvi'
+include ':api:anime-details'
+include ':app:anime-details'
+include ':common:navigation'

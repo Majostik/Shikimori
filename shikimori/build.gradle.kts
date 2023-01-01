@@ -40,10 +40,13 @@ android {
 dependencies {
 
     implementation(project(":api:animelist"))
+    implementation(project(":api:anime-details"))
+
     implementation(project(":app:animelist"))
+    implementation(project(":app:anime-details"))
 
     implementation(project(":common:dagger"))
     implementation(project(":common:retrofit"))
     implementation(project(":common:android"))
+    implementation(project(":common:navigation"))
 }
-//
