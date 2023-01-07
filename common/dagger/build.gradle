@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common:android"))
+    implementation(projects.common.android)
 }

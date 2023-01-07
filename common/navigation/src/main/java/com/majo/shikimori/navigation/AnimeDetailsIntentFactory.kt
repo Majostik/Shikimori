@@ -4,6 +4,6 @@ import android.content.Intent
 
 interface AnimeDetailsIntentFactory {
 
-    fun animeDetailsIntent(id: Long): Intent
+    fun animeDetailsIntent(id: Long, name: String?): Intent
 
 }

@@ -5,12 +5,13 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":api:anime-details"))
-    implementation(project(":common:dagger"))
-    implementation(project(":common:android"))
-    implementation(project(":common:navigation"))
+    implementation(projects.api.animeDetails)
+    implementation(projects.common.dagger)
+    implementation(projects.common.android)
+    implementation(projects.common.navigation)
+    implementation(projects.common.designSystem)
+    implementation(projects.common.mvi)
+    implementation(libs.lifecycleViewModel)
     implementation(libs.glide)
     implementation(libs.coilCompose)
-    implementation(project(":common:mvi"))
-    implementation(libs.lifecycleViewModel)
 }

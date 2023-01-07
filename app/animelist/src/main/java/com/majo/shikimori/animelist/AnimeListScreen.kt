@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -42,6 +43,7 @@ import com.majo.shikimori.animelist.model.Anime
 import com.majo.shikimori.animelist.mvi.entity.AnimeListAction
 import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
 import com.majo.shikimori.animelist.mvi.entity.AnimeListState
+import com.majo.shikimori.compose.ShikimoriTheme
 import kotlinx.coroutines.flow.Flow
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -60,19 +62,17 @@ fun AnimeListScreen(viewModel: AnimeListViewModel, state: AnimeListState, events
         }
     }
 
-    MaterialTheme {
+    ShikimoriTheme {
         Scaffold(
             topBar = {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Shikimori",
+                            text = stringResource(R.string.app_bar_title),
                             color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
+                            style = MaterialTheme.typography.titleMedium
                         )
-                    },
-                    colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.White)
+                    }
                 )
             }) {
                 LazyVerticalGrid(
@@ -80,7 +80,7 @@ fun AnimeListScreen(viewModel: AnimeListViewModel, state: AnimeListState, events
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-                    modifier = Modifier.padding(it)
+                    modifier = Modifier.padding(it),
                 ) {
                     items(state.animeList) {
                         AnimeItem(viewModel, it)
@@ -100,7 +100,7 @@ fun AnimeItem(viewModel: AnimeListViewModel, anime: Anime) {
         modifier = Modifier
             .height(310.dp),
         onClick = {
-            viewModel.accept(AnimeListAction.OpenAnimeDetailsScreen(anime.id))
+            viewModel.accept(AnimeListAction.OpenAnimeDetailsScreen(anime.id, anime.russianName))
         }
     ) {
         Column {

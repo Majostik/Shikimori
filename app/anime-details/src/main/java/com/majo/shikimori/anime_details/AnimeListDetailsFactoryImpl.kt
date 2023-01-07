@@ -8,7 +8,7 @@ import javax.inject.Inject
 class AnimeListDetailsFactoryImpl @Inject constructor(
     private val context: Context
 ): AnimeDetailsIntentFactory {
-    override fun animeDetailsIntent(id: Long): Intent {
-        return AnimeDetailsActivity.createIntent(context, id)
+    override fun animeDetailsIntent(id: Long, name: String?): Intent {
+        return AnimeDetailsActivity.createIntent(context, AnimeDetailsArgs(id, name))
     }
 }

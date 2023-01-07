@@ -21,7 +21,7 @@ class AnimeListActor @Inject constructor(
         is AnimeListAction.Retry -> interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT)
         is AnimeListAction.LoadNextPage -> interactor.loadAnime(page = action.page, limit = DEFAULT_LIMIT)
         is AnimeListAction.OpenAnimeDetailsScreen -> flow {
-            emit(AnimeListInternalAction.OpenScreen(intentFactory.animeDetailsIntent(action.id)))
+            emit(AnimeListInternalAction.OpenScreen(intentFactory.animeDetailsIntent(action.id, action.name)))
         }
     }
 
