@@ -6,4 +6,5 @@ plugins {
 dependencies {
     api(libs.retrofit)
     api(libs.retrofit.converter.gson)
+    implementation(projects.common.dagger)
 }

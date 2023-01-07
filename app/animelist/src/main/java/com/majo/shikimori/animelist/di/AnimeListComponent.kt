@@ -1,14 +1,14 @@
 package com.majo.shikimori.animelist.di
 
-import androidx.lifecycle.ViewModelStore
 import com.majo.shikimori.animelist.AnimeListActivity
 import com.majo.shikimori.dagger.PerActivity
-import dagger.BindsInstance
+import com.majo.shikimori.dagger.anvil.ActivityScope
+import com.squareup.anvil.annotations.MergeComponent
 import dagger.Component
 
-@Component(
+@MergeComponent(
+    scope = ActivityScope::class,
     dependencies = [AnimeListDependencies::class],
-    modules = [AnimeListModule::class]
 )
 @PerActivity
 interface AnimeListComponent {

@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 class AnimeDetailsActor @Inject constructor(
     private val interactor: AnimeDetailsInteractor,
-    private val intentFactory: ActivityIntentFactory,
     private val id: Long
 ): Actor<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState> {
     override fun process(

@@ -2,6 +2,9 @@ package com.majo.shikimori.animelist
 
 import com.majo.shikimori.animelist.mvi.AnimeListActor.Companion.INIT_PAGE
 import com.majo.shikimori.animelist.mvi.entity.AnimeListInternalAction
+import com.majo.shikimori.dagger.PerActivity
+import com.majo.shikimori.dagger.anvil.ActivityScope
+import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -10,6 +13,8 @@ interface AnimeListInteractor {
     fun loadAnime(page: Int, limit: Int): Flow<AnimeListInternalAction>
 }
 
+@ContributesBinding(ActivityScope::class)
+@PerActivity
 class AnimeListInteractorImpl @Inject constructor(
     private val animeListApi: AnimeListApi
 ): AnimeListInteractor {
