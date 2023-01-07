@@ -3,6 +3,7 @@ package com.majo.shikimori.anime_details
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -77,6 +78,9 @@ fun AnimeDetailsScreen(
                             fontSize = 20.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.clickable {
+                                viewModel.accept(AnimeDetailsAction.LoadData)
+                            }
                         )
                     },
                     navigationIcon = {

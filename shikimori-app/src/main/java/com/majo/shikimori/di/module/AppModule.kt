@@ -3,10 +3,13 @@ package com.majo.shikimori.di.module
 import android.content.Context
 import android.content.res.Resources
 import com.majo.shikimori.App
+import com.majo.shikimori.dagger.anvil.AppScope
+import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 
 @Module
+@ContributesTo(AppScope::class)
 open class AppModule {
 
     @Provides

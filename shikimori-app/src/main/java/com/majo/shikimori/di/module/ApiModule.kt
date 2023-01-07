@@ -15,7 +15,6 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        ApiModule.Deps::class,
         AnimeListApiModule::class,
         AnimeDetailsApiModule::class
     ]
@@ -46,13 +45,5 @@ object ApiModule {
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient()
     }
-
-    @Module
-    interface Deps {
-
-        @Binds
-        fun bindsRetrofitFactory(factory: RetrofitFactoryImpl): RetrofitFactory
-    }
-
 
 }
