@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.lifecycleScope
+import com.majo.shikimori.android.getArgs
 import com.majo.shikimori.android.lazySavedStateViewModel
+import com.majo.shikimori.android.putArgs
 import com.majo.shikimori.anime_details.di.DaggerAnimeDetailsComponent
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsOneTimeEvent
 import com.majo.shikimori.dagger.findComponentDependencies
@@ -23,17 +25,24 @@ class AnimeDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val args = intent?.getArgs<AnimeDetailsArgs>()
+
         DaggerAnimeDetailsComponent
             .factory()
             .create(
                 dependencies = findComponentDependencies(),
-                id = intent.getLongExtra(EXTRA_ID, 0L)
+                id = args?.id ?: 0L
             )
             .inject(this)
 
         setContent {
             val composeState by viewModel.state.collectAsState()
-            AnimeDetailsScreen(viewModel = viewModel, state = composeState, events = viewModel.events)
+            AnimeDetailsScreen(
+                viewModel = viewModel,
+                state = composeState,
+                events = viewModel.events,
+                args = args
+            )
         }
 
         lifecycleScope.launchWhenCreated {
@@ -50,11 +59,8 @@ class AnimeDetailsActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val EXTRA_ID = "com.majo.shikimori.id"
-
-        fun createIntent(context: Context, id: Long) = Intent(context, AnimeDetailsActivity::class.java)
-            .apply {
-                putExtra(EXTRA_ID, id)
-            }
+        fun createIntent(context: Context, args: AnimeDetailsArgs) =
+            Intent(context, AnimeDetailsActivity::class.java)
+                .putArgs(args)
     }
 }

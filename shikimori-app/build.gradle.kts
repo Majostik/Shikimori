@@ -39,14 +39,15 @@ android {
 
 dependencies {
 
-    implementation(project(":api:animelist"))
-    implementation(project(":api:anime-details"))
+    implementation(projects.api.animelist)
+    implementation(projects.api.animeDetails)
 
-    implementation(project(":app:animelist"))
-    implementation(project(":app:anime-details"))
+    implementation(projects.app.animelist)
+    implementation(projects.app.animeDetails)
 
-    implementation(project(":common:dagger"))
-    implementation(project(":common:retrofit"))
-    implementation(project(":common:android"))
-    implementation(project(":common:navigation"))
+    implementation(projects.common.designSystem)
+    implementation(projects.common.dagger)
+    implementation(projects.common.retrofit)
+    implementation(projects.common.android)
+    implementation(projects.common.navigation)
 }

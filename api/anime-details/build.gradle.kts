@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common:retrofit"))
+    implementation(projects.common.retrofit)
 }

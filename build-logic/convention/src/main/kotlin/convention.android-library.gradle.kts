@@ -6,6 +6,7 @@ import org.gradle.api.JavaVersion
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id ("kotlin-parcelize")
 }
 
 project.withVersionCatalog { libs ->

@@ -40,13 +40,19 @@ import coil.compose.AsyncImage
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsAction
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsOneTimeEvent
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsState
+import com.majo.shikimori.compose.ShikimoriTheme
 import kotlinx.coroutines.flow.Flow
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimeDetailsScreen(viewModel: AnimeDetailsViewModel, state: AnimeDetailsState, events: Flow<AnimeDetailsOneTimeEvent>) {
+fun AnimeDetailsScreen(
+    viewModel: AnimeDetailsViewModel,
+    state: AnimeDetailsState,
+    events: Flow<AnimeDetailsOneTimeEvent>,
+    args: AnimeDetailsArgs?
+) {
     val context = LocalContext.current
     LaunchedEffect(events) {
         events.collect { event ->
@@ -59,16 +65,18 @@ fun AnimeDetailsScreen(viewModel: AnimeDetailsViewModel, state: AnimeDetailsStat
         }
     }
 
-    MaterialTheme {
+    ShikimoriTheme {
         Scaffold(
             topBar = {
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Name",
+                            text = args?.name.toString(),
                             color = Color.Black,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
+                            fontSize = 20.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
                     },
                     navigationIcon = {
