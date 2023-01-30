@@ -27,8 +27,9 @@ interface HasComponentDependencies {
 @Target(AnnotationTarget.FUNCTION)
 annotation class ComponentDependenciesKey(val value: KClass<out ComponentDependencies>)
 
+@Suppress("UNCHECKED_CAST")
 fun <T: ComponentDependencies> getDependencies(clazz: Class<T>, dependencyHolder: HasComponentDependencies): T {
-    val dependencies = dependencyHolder.dependencies?.get(clazz) as? T
+    val dependencies = dependencyHolder.dependencies.get(clazz) as? T
     return dependencies ?: throw IllegalStateException("Missing Dependency")
 }
 

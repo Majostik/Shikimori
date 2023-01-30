@@ -4,5 +4,6 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.common.dagger)
     implementation(projects.common.retrofit)
 }

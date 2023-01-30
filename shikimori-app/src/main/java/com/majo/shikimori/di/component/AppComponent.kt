@@ -12,13 +12,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@MergeComponent(
-    scope = AppScope::class,
-    modules = [
-        ApiModule::class,
-        DependenciesModule::class,
-    ]
-)
+@MergeComponent(scope = AppScope::class,)
 interface AppComponent:
     AnimeListDependencies,
     AnimeDetailsDependencies
