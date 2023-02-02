@@ -3,32 +3,25 @@ package com.majo.shikimori.dagger
 import android.app.Activity
 import android.content.Context
 import androidx.fragment.app.Fragment
-import dagger.MapKey
-import kotlin.reflect.KClass
-
 interface ComponentDependencies
 
 inline fun <reified T : ComponentDependencies> Fragment.findComponentDependencies(): T {
-    return getDependencies(T::class.java, findComponentDependenciesProvider())
+    return getDependencies(findComponentDependenciesProvider())
 }
 
 inline fun <reified T : ComponentDependencies> Activity.findComponentDependencies(): T {
-    return getDependencies(T::class.java, findComponentDependenciesProvider())
+    return getDependencies(findComponentDependenciesProvider())
 }
-
-
-typealias ComponentDependenciesProvider = Map<Class<out ComponentDependencies>, @JvmSuppressWildcards ComponentDependencies>
 
 interface HasComponentDependencies {
-    val dependencies: ComponentDependenciesProvider
+    fun  getDependency(): AppComponentDependencies
 }
 
-@MapKey
-@Target(AnnotationTarget.FUNCTION)
-annotation class ComponentDependenciesKey(val value: KClass<out ComponentDependencies>)
+interface AppComponentDependencies
 
-fun <T: ComponentDependencies> getDependencies(clazz: Class<T>, dependencyHolder: HasComponentDependencies): T {
-    val dependencies = dependencyHolder.dependencies?.get(clazz) as? T
+@Suppress("UNCHECKED_CAST")
+fun <T: ComponentDependencies> getDependencies(dependencyHolder: HasComponentDependencies): T {
+    val dependencies = dependencyHolder.getDependency() as? T
     return dependencies ?: throw IllegalStateException("Missing Dependency")
 }
 

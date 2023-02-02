@@ -3,8 +3,10 @@ package com.majo.shikimori.di.module
 import com.google.gson.Gson
 import com.majo.anime_details.di.AnimeDetailsApiModule
 import com.majo.shikimori.animelist.di.AnimeListApiModule
+import com.majo.shikimori.dagger.anvil.AppScope
 import com.majo.shikimori.retrofit.RetrofitFactory
 import com.majo.shikimori.retrofit.RetrofitFactoryImpl
+import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -13,12 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module(
-    includes = [
-        AnimeListApiModule::class,
-        AnimeDetailsApiModule::class
-    ]
-)
+@Module
+@ContributesTo(AppScope::class)
 object ApiModule {
 
     @Provides
