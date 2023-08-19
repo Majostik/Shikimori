@@ -11,11 +11,15 @@ class AnimeListReducer @Inject constructor(): Reducer<AnimeListInternalAction, A
         previousState: AnimeListState
     ): AnimeListState {
         return when(internalAction) {
+            is AnimeListInternalAction.Clear -> {
+                AnimeListState.INITIAL
+            }
             is AnimeListInternalAction.AnimeLoaded -> {
                 previousState.copy(
                     animeList = previousState.animeList + internalAction.anime,
                     page = previousState.page + 1,
-                    isLoading = false
+                    isLoading = false,
+                    query = internalAction.query
                 )
             }
             is AnimeListInternalAction.AnimeLoading, is AnimeListInternalAction.FirstAnimeLoading -> {

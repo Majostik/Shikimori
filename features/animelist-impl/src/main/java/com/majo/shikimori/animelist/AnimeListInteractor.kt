@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 interface AnimeListInteractor {
-    fun loadAnime(page: Int, limit: Int): Flow<AnimeListInternalAction>
+    fun loadAnime(page: Int, limit: Int, query: String? = null): Flow<AnimeListInternalAction>
 }
 
 @ContributesBinding(ScreenScope::class)
@@ -23,15 +23,15 @@ class AnimeListInteractorImpl @Inject constructor(
     private val animeListApi: AnimeListApi,
     private val errorConverter: ErrorConverter
 ): AnimeListInteractor {
-    override fun loadAnime(page: Int, limit: Int): Flow<AnimeListInternalAction> {
+    override fun loadAnime(page: Int, limit: Int, query : String?): Flow<AnimeListInternalAction> {
         return flow {
             if (page == INIT_PAGE) {
                 emit(AnimeListInternalAction.FirstAnimeLoading)
             } else {
                 emit(AnimeListInternalAction.AnimeLoading)
             }
-            val list = animeListApi.getAnimes(page, limit)
-            emit(AnimeListInternalAction.AnimeLoaded(list))
+            val list = animeListApi.getAnimes(page, limit, query)
+            emit(AnimeListInternalAction.AnimeLoaded(list, query))
         }.catch {
             emit(AnimeListInternalAction.AnimeError(error = errorConverter.convertError(it)))
         }

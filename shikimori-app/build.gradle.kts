@@ -55,4 +55,6 @@ dependencies {
     implementation(projects.common.retrofit)
     implementation(projects.common.android)
     implementation(projects.common.navigation)
+
+    implementation(libs.okhttp.logging.interceptor)
 }

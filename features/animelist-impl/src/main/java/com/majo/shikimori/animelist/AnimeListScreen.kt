@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -28,7 +31,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,6 +53,7 @@ import com.majo.shikimori.animelist.mvi.entity.AnimeListAction
 import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
 import com.majo.shikimori.animelistImpl.R
 import com.majo.shikimori.compose.ShikimoriTheme
+import com.majo.shikimori.compose.components.TopAppBarWithSearch
 import com.majo.shikimori.dagger.daggerViewModel
 import com.majo.shikimori.dagger.findComponentDependencies
 
@@ -65,6 +72,19 @@ fun AnimeListScreen(navController: NavHostController) {
 
     val animeDetailsScreenProvider = component.animeDetailsScreenProvider()
 
+    val lazyGridListState = rememberLazyGridState()
+
+    val shouldStartPaginate = remember {
+        derivedStateOf {
+            !state.isLoading && (lazyGridListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -9) >= (lazyGridListState.layoutInfo.totalItemsCount - 6)
+        }
+    }
+
+    LaunchedEffect(shouldStartPaginate.value) {
+        if (shouldStartPaginate.value && !state.isLoading)
+            viewModel.accept(AnimeListAction.LoadNextPage(page = state.page + 1))
+    }
+
     LaunchedEffect(events) {
         events.collect { event ->
             when(event) {
@@ -81,13 +101,17 @@ fun AnimeListScreen(navController: NavHostController) {
     ShikimoriTheme {
         Scaffold(
             topBar = {
-                TopAppBar(
+                TopAppBarWithSearch(
+                    modifier = Modifier.padding(horizontal = 16.dp),
                     title = {
                         Text(
-                            text = stringResource(R.string.app_bar_title),
+                            text = stringResource(R.string.anime_list_title),
                             color = Color.Black,
                             style = MaterialTheme.typography.titleMedium
                         )
+                    },
+                    onSearchResult = {
+                        viewModel.accept(AnimeListAction.Search(query = it))
                     }
                 )
             }) {
@@ -97,6 +121,7 @@ fun AnimeListScreen(navController: NavHostController) {
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
                     modifier = Modifier.padding(it),
+                    state = lazyGridListState
                 ) {
                     items(state.animeList) {anime ->
                         AnimeItem(anime) {

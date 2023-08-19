@@ -15,7 +15,8 @@ class MangaListReducer @Inject constructor(): Reducer<MangaListInternalAction, M
                 previousState.copy(
                     mangaList = previousState.mangaList + internalAction.mangas,
                     page = previousState.page + 1,
-                    isLoading = false
+                    isLoading = false,
+                    query = internalAction.query
                 )
             }
             is MangaListInternalAction.MangaLoading, is MangaListInternalAction.FirstMangaLoading -> {
@@ -23,6 +24,9 @@ class MangaListReducer @Inject constructor(): Reducer<MangaListInternalAction, M
             }
             is MangaListInternalAction.MangaError -> {
                 previousState.copy(isLoading = false)
+            }
+            is MangaListInternalAction.Clear -> {
+                MangaListState.INITIAL
             }
             else -> previousState
         }
