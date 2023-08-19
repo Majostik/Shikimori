@@ -1,5 +1,7 @@
 package com.majo.shikimori.anime_details.mvi
 
+import com.majo.shikimori.android.ErrorConverter
+import com.majo.shikimori.android.LoadableState
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsInternalAction
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsState
 import com.majo.shikimori.mvi.Reducer
@@ -12,7 +14,13 @@ class AnimeDetailsReducer @Inject constructor(): Reducer<AnimeDetailsInternalAct
     ): AnimeDetailsState {
         return when(internalAction) {
             is AnimeDetailsInternalAction.AnimeLoaded -> {
-                previousState.copy(animeDetails = internalAction.anime)
+                previousState.copy(data = LoadableState.Loaded(internalAction.anime))
+            }
+            is AnimeDetailsInternalAction.AnimeLoading -> {
+                previousState.copy(data = LoadableState.Loading())
+            }
+            is AnimeDetailsInternalAction.AnimeError -> {
+                previousState.copy(data = LoadableState.Error(internalAction.error))
             }
             else -> previousState
         }

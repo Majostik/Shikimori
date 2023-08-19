@@ -36,20 +36,16 @@ import com.majo.shikimori.navigation.NavigationItem
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
-    Log.e("dagger","context " + context)
     val homeComponent = DaggerHomeListComponent.factory().create(context.findComponentDependencies())
     val animeListScreenProvider = homeComponent.animeListScreenProvider()
-
     val navController = rememberNavController()
-
-    Log.e("screen", "home navController " + navController)
 
     ShikimoriTheme {
         Scaffold(
             bottomBar = {
                 BottomNavigationBar(
                     modifier = Modifier
-                        .height(56.dp),
+                        .height(64.dp),
                     navController
                 )
             }
@@ -81,8 +77,8 @@ fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
         modifier
             .graphicsLayer {
                 shape = RoundedCornerShape(
-                    topStart = 20.dp,
-                    topEnd = 20.dp
+                    topStart = 8.dp,
+                    topEnd = 8.dp
                 )
                 clip = true
             },

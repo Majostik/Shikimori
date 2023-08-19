@@ -20,7 +20,7 @@ class AnimeListScreenProviderImpl @Inject constructor(
             AnimeListScreen(navController)
         }
 
-        animeDetailsScreenProvider.registerAnimeDetailsScreen(navGraphBuilder)
+        animeDetailsScreenProvider.registerAnimeDetailsScreen(navGraphBuilder, navController)
     }
 
 }

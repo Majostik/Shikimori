@@ -40,15 +40,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.majo.shikimori.anime_details.AnimeDetailsScreenProvider
 import com.majo.shikimori.animelist.di.DaggerAnimeListComponent
 import com.majo.shikimori.animelist.model.Anime
 import com.majo.shikimori.animelist.mvi.entity.AnimeListAction
 import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
 import com.majo.shikimori.animelistImpl.R
 import com.majo.shikimori.compose.ShikimoriTheme
+import com.majo.shikimori.dagger.daggerViewModel
 import com.majo.shikimori.dagger.findComponentDependencies
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -58,7 +57,9 @@ fun AnimeListScreen(navController: NavHostController) {
     val context = LocalContext.current
 
     val component = DaggerAnimeListComponent.factory().create(context.findComponentDependencies())
-    val viewModel = component.viewModel()
+    val viewModel = daggerViewModel {
+        component.viewModel()
+    }
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
 

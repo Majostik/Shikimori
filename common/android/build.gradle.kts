@@ -1,5 +1,5 @@
 plugins {
-    id ("convention.android-library")
+    id("convention.android-library")
     id("convention.dagger")
 }
 
@@ -9,4 +9,5 @@ dependencies {
     api(libs.lifecycleLivedataKtx)
     api(libs.activityKtx)
     api(libs.fragmentKtx)
+    implementation(projects.common.dagger)
 }
