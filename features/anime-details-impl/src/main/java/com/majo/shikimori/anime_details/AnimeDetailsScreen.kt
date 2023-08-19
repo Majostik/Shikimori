@@ -152,7 +152,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
         ) {
             AsyncImage(
                 model = "https://shikimori.one/" + anime.image?.original,
-                contentDescription = anime?.name,
+                contentDescription = anime.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .height(300.dp)
@@ -160,7 +160,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
             )
             Column {
                 Text(
-                    text = anime?.russianName.toString(),
+                    text = anime.russianName.toString(),
                     overflow = TextOverflow.Ellipsis,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
@@ -168,25 +168,25 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Text(
-                    text = anime?.kind.toString(),
+                    text = anime.kind.toString(),
                     color = Color.Black,
                     fontSize = 16.sp,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Text(
-                    text = anime?.episodes.toString(),
+                    text = anime.episodes.toString(),
                     color = Color.Black,
                     fontSize = 16.sp,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Text(
-                    text = anime?.status.toString(),
+                    text = anime.status.toString(),
                     color = Color.Black,
                     fontSize = 16.sp,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Text(
-                    text = anime?.score.toString(),
+                    text = anime.score.toString(),
                     color = Color.Black,
                     fontSize = 16.sp,
                     modifier = Modifier.padding(horizontal = 8.dp)
@@ -197,7 +197,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
         ) {
-            items(anime?.genres.orEmpty()) {
+            items(anime.genres.orEmpty()) {
                 Box(
                     modifier = Modifier
                         .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(8.dp))
@@ -213,7 +213,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
             }
         }
         Text(
-            text = anime?.description.toString(),
+            text = anime.description.toString(),
             color = Color.Black,
             fontSize = 16.sp,
             modifier = Modifier

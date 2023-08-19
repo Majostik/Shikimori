@@ -1,6 +1,7 @@
 package com.majo.shikimori.home
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,11 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +26,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.majo.shikimori.animelist_public.AnimeListScreenProvider
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.dagger.findComponentDependencies
@@ -39,13 +43,24 @@ fun HomeScreen() {
     val animeListScreenProvider = homeComponent.animeListScreenProvider()
     val mangaListScreenProvider = homeComponent.mangaListScreenProvider()
     val navController = rememberNavController()
+    val systemUiController = rememberSystemUiController()
+    val isLight = !isSystemInDarkTheme()
+
+    SideEffect {
+        systemUiController.run {
+            setSystemBarsColor(
+                color = Color.Transparent,
+                darkIcons = isLight
+            )
+        }
+    }
 
     ShikimoriTheme {
         Scaffold(
             bottomBar = {
                 BottomNavigationBar(
                     modifier = Modifier
-                        .height(56.dp),
+                        .height(76.dp),
                     navController
                 )
             }
@@ -54,7 +69,8 @@ fun HomeScreen() {
                 navController,
                 animeListScreenProvider,
                 mangaListScreenProvider,
-                paddingValues)
+                paddingValues
+            )
         }
     }
 }
@@ -84,6 +100,7 @@ fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
         NavigationItem.MangaList,
     )
     NavigationBar(
+        modifier = modifier,
         contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

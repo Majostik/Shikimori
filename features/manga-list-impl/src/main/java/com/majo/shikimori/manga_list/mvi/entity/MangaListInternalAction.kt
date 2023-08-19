@@ -6,7 +6,9 @@ sealed interface MangaListInternalAction {
     object FirstMangaLoading: MangaListInternalAction
     object MangaLoading: MangaListInternalAction
     data class MangaError(val error: String): MangaListInternalAction
-    data class MangaLoaded(val mangas: List<Manga>): MangaListInternalAction
+    data class MangaLoaded(val mangas: List<Manga>, val query: String? = null): MangaListInternalAction
+
+    object Clear: MangaListInternalAction
 
     data class OpenScreen(val id: Long, val name: String?): MangaListInternalAction
 }

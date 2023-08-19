@@ -23,5 +23,6 @@ project.withVersionCatalog { libs ->
         add(Configuration.implementation, libs.composeConstraint)
         add(Configuration.implementation, libs.compose.navigation)
         add(Configuration.implementation, libs.coilCompose)
+        add(Configuration.implementation, libs.accompanistSystemuicontroller)
     }
 }
