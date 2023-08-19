@@ -7,6 +7,7 @@ import com.majo.shikimori.dagger.PerScreen
 import com.majo.shikimori.dagger.anvil.ScreenScope
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -23,12 +24,10 @@ class AnimeDetailsInteractorImpl @Inject constructor(
     override fun getAnimeDetails(id: Long): Flow<AnimeDetailsInternalAction> {
         return flow {
             emit(AnimeDetailsInternalAction.AnimeLoading)
-            try {
-                val anime = animeDetailsApi.getAnimeDetails(id)
-                emit(AnimeDetailsInternalAction.AnimeLoaded(anime))
-            } catch (e: Exception) {
-                emit(AnimeDetailsInternalAction.AnimeError(error = errorConverter.convertError(e)))
-            }
+            val anime = animeDetailsApi.getAnimeDetails(id)
+            emit(AnimeDetailsInternalAction.AnimeLoaded(anime))
+        }.catch {
+            emit(AnimeDetailsInternalAction.AnimeError(error = errorConverter.convertError(it)))
         }
     }
 }

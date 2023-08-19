@@ -6,4 +6,5 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class NavigationItem(var route: String, var icon: ImageVector, var title: String) {
     object AnimeList : NavigationItem("Anime", Icons.Rounded.List, "Anime")
+    object MangaList : NavigationItem("Manga", Icons.Rounded.List, "Manga")
 }

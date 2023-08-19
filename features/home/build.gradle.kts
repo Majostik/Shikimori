@@ -11,5 +11,6 @@ dependencies {
     implementation(projects.common.mvi)
     implementation(projects.common.designSystem)
     implementation(projects.features.animelistPublic)
+    implementation(projects.features.mangaListPublic)
     implementation(libs.lifecycleViewModel)
 }

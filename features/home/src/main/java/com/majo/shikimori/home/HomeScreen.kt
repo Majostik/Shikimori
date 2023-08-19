@@ -1,9 +1,11 @@
 package com.majo.shikimori.home
 
 import android.annotation.SuppressLint
-import android.util.Log
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -11,14 +13,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.R
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -29,6 +27,7 @@ import com.majo.shikimori.animelist_public.AnimeListScreenProvider
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.dagger.findComponentDependencies
 import com.majo.shikimori.home.di.DaggerHomeListComponent
+import com.majo.shikimori.manga_list.MangaListScreenProvider
 import com.majo.shikimori.navigation.NavigationItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -38,6 +37,7 @@ fun HomeScreen() {
     val context = LocalContext.current
     val homeComponent = DaggerHomeListComponent.factory().create(context.findComponentDependencies())
     val animeListScreenProvider = homeComponent.animeListScreenProvider()
+    val mangaListScreenProvider = homeComponent.mangaListScreenProvider()
     val navController = rememberNavController()
 
     ShikimoriTheme {
@@ -45,12 +45,16 @@ fun HomeScreen() {
             bottomBar = {
                 BottomNavigationBar(
                     modifier = Modifier
-                        .height(64.dp),
+                        .height(56.dp),
                     navController
                 )
             }
-        ) {
-            HomeScreenNavigationConfigurations(navController, animeListScreenProvider)
+        ) { paddingValues ->
+            HomeScreenNavigationConfigurations(
+                navController,
+                animeListScreenProvider,
+                mangaListScreenProvider,
+                paddingValues)
         }
     }
 }
@@ -58,13 +62,18 @@ fun HomeScreen() {
 @Composable
 private fun HomeScreenNavigationConfigurations(
     navController: NavHostController,
-    animeListScreenProvider: AnimeListScreenProvider
+    animeListScreenProvider: AnimeListScreenProvider,
+    mangaListScreenProvider: MangaListScreenProvider,
+    paddingValues: PaddingValues
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = NavigationItem.AnimeList.route
-    ) {
-        animeListScreenProvider.animeListScreen(this, navController)
+    Column(modifier = Modifier.padding(paddingValues)) {
+        NavHost(
+            navController = navController,
+            startDestination = NavigationItem.AnimeList.route
+        ) {
+            animeListScreenProvider.animeListScreen(this, navController)
+            mangaListScreenProvider.mangaListScreen(this, navController)
+        }
     }
 }
 
@@ -72,16 +81,9 @@ private fun HomeScreenNavigationConfigurations(
 fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
     val bottomNavigationItems = listOf(
         NavigationItem.AnimeList,
+        NavigationItem.MangaList,
     )
     NavigationBar(
-        modifier
-            .graphicsLayer {
-                shape = RoundedCornerShape(
-                    topStart = 8.dp,
-                    topEnd = 8.dp
-                )
-                clip = true
-            },
         contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -89,7 +91,7 @@ fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
         bottomNavigationItems.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(imageVector = item.icon, contentDescription = item.route) },
-                label = { Text(text = item.route) },
+                label = { Text(text = item.title) },
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {

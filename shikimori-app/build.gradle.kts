@@ -38,15 +38,17 @@ android {
 }
 
 dependencies {
-
     implementation(projects.api.animelist)
     implementation(projects.api.animeDetails)
+    implementation(projects.api.mangaList)
 
     implementation(projects.features.home)
     implementation(projects.features.animelistPublic)
     implementation(projects.features.animeDetailsPublic)
     implementation(projects.features.animelistImpl)
     implementation(projects.features.animeDetailsImpl)
+    implementation(projects.features.mangaListPublic)
+    implementation(projects.features.mangaListImpl)
 
     implementation(projects.common.designSystem)
     implementation(projects.common.dagger)
