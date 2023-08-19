@@ -42,8 +42,11 @@ dependencies {
     implementation(projects.api.animelist)
     implementation(projects.api.animeDetails)
 
-    implementation(projects.app.animelist)
-    implementation(projects.app.animeDetails)
+    implementation(projects.features.home)
+    implementation(projects.features.animelistPublic)
+    implementation(projects.features.animeDetailsPublic)
+    implementation(projects.features.animelistImpl)
+    implementation(projects.features.animeDetailsImpl)
 
     implementation(projects.common.designSystem)
     implementation(projects.common.dagger)

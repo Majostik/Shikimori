@@ -8,12 +8,19 @@
 	compose = "1.3.2" # https://developer.android.com/jetpack/androidx/releases/compose-ui
 	composeCompiler = "1.3.2" # https://developer.android.com/jetpack/androidx/releases/compose-compiler
 	composeActivity = "1.6.1"
+	compose-navigation = "2.4.0"
     dagger = "2.43.2"
     retrofit = "2.9.0"
     coroutines = "1.3.9"
     glide = "4.13.2"
 	kotlin = "1.6.21"
 	buildGradle = "7.3.1"
+agp = "7.3.1"
+org-jetbrains-kotlin-android = "1.8.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+material = "1.9.0"
 
 [libraries]
 	appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat" }
@@ -30,6 +37,7 @@
 	composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 	composePreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 	composeConstraint = "androidx.constraintlayout:constraintlayout-compose:1.0.1" # https://developer.android.com/jetpack/androidx/releases/constraintlayout
+	compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
 	coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 	lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 	lifecycleRuntimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
@@ -45,3 +53,10 @@
 	kotlinGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 	buildGradle = { module = "com.android.tools.build:gradle", version.ref ="buildGradle" }
 	coilCompose = "io.coil-kt:coil-compose:2.2.2"
+	junit = { group = "junit", name = "junit", version.ref = "junit" }
+	androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+	espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+	material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+[plugins]
+	com-android-library = { id = "com.android.library", version.ref = "agp" }
+	org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }

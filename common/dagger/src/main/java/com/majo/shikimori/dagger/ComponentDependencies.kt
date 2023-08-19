@@ -13,6 +13,10 @@ inline fun <reified T : ComponentDependencies> Activity.findComponentDependencie
     return getDependencies(findComponentDependenciesProvider())
 }
 
+inline fun <reified T : ComponentDependencies> Context.findComponentDependencies(): T {
+    return getDependencies(findComponentDependenciesProvider(this))
+}
+
 interface HasComponentDependencies {
     fun  getDependency(): AppComponentDependencies
 }
