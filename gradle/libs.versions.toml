@@ -23,11 +23,14 @@
 	espresso-core = "3.5.1"
 	material = "1.9.0"
 	okhttp = "4.10.0"
+	kotlinxSerializationConverter = "1.0.0"
+	kotlinxSerialization = "1.4.1"
 
 [libraries]
 	appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appCompat" }
 	activityKtx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 	fragmentKtx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+ 	kotlinxSerialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref  = "kotlinxSerialization"}
 	composeFoundation = "androidx.compose.foundation:foundation:1.3.1"
 	composeFoundationLayout = "androidx.compose.foundation:foundation-layout:1.3.1"
 	composeMaterialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose" }
@@ -47,7 +50,7 @@
 	lifecycleViewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 	lifecycleViewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 	retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-	retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+	retrofit-converter-kotlinxSerialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "kotlinxSerializationConverter" }
 	okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 	dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 	daggerCompiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }

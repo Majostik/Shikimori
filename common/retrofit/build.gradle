@@ -5,6 +5,6 @@ plugins {
 
 dependencies {
     api(libs.retrofit)
-    api(libs.retrofit.converter.gson)
+    api(libs.kotlinxSerialization)
     implementation(projects.common.dagger)
 }

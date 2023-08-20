@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="anime_details_type">Тип</string>
+    <string name="anime_details_episodes">Эпизоды</string>
+    <string name="anime_details_status">Статус</string>
+    <string name="anime_details_rating">Рейтинг</string>
+    <string name="anime_details_description">Описание</string>
+    <string name="anime_details_show_description">Показать описание</string>
+    <string name="anime_details_name">%1$s / %2$s</string>
+
+</resources>
