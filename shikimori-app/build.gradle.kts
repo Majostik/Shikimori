@@ -56,5 +56,7 @@ dependencies {
     implementation(projects.common.android)
     implementation(projects.common.navigation)
 
+    implementation(libs.kotlinxSerialization)
+    implementation(libs.retrofit.converter.kotlinxSerialization)
     implementation(libs.okhttp.logging.interceptor)
 }
