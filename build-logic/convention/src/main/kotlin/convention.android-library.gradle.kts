@@ -12,6 +12,9 @@ plugins {
 project.withVersionCatalog { libs ->
     configure<BaseExtension> {
         compileSdkVersion(libs.versions.compileSdk.get().toInt())
+        defaultConfig {
+            minSdk = 23
+        }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8

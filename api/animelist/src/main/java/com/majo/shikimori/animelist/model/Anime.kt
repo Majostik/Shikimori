@@ -8,7 +8,7 @@ data class Anime(
     @SerializedName("russian") val russianName: String?,
     @SerializedName("image") val image: Image?,
     @SerializedName("kind") val kind: String?,
-    @SerializedName("score") val score: String?,
+    @SerializedName("score") val score: Double?,
     @SerializedName("status") val status: String?,
     @SerializedName("episodes") val episodes: Int?
 )

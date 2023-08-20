@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -141,7 +142,7 @@ fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier
-            .height(310.dp),
+            .height(290.dp),
         onClick = onItemClick
     ) {
         Column {
@@ -154,24 +155,25 @@ fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
                         .height(200.dp)
                         .fillMaxWidth()
                 )
-                Box(
-                    modifier = Modifier
-                        .align(alignment = Alignment.BottomStart)
-                        .background(Color.Black.copy(alpha = 0.3f))
-                ) {
-                    Text(
-                        text = anime.score.toString(),
-                        color = Color.White,
-                        fontSize = 16.sp,
+                if (anime.score != 0.0)
+                    Box(
                         modifier = Modifier
-                            .padding(4.dp),
-                    )
-                }
+                            .align(alignment = Alignment.BottomStart)
+                            .background(Color.Black.copy(alpha = 0.3f))
+                    ) {
+                        Text(
+                            text = anime.score.toString(),
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            modifier = Modifier
+                                .padding(4.dp),
+                        )
+                    }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = anime.russianName.toString(),
-                maxLines = 3,
+                text = anime.name.toString(),
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
