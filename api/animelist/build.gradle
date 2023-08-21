@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.common.dagger)
+    implementation(projects.common.anvil)
     implementation(projects.common.retrofit)
 }

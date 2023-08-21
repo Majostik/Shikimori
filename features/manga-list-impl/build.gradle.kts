@@ -8,6 +8,7 @@ dependencies {
     implementation(projects.api.mangaList)
     implementation(projects.features.mangaListPublic)
     implementation(projects.common.dagger)
+    implementation(projects.common.anvil)
     implementation(projects.common.android)
     implementation(projects.common.navigation)
     implementation(projects.common.mvi)

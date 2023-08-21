@@ -7,6 +7,7 @@ plugins {
 dependencies {
     implementation(projects.common.dagger)
     implementation(projects.common.android)
+    implementation(projects.common.anvil)
     implementation(projects.common.navigation)
     implementation(projects.common.mvi)
     implementation(projects.common.designSystem)

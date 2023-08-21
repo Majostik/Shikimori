@@ -1,7 +1,7 @@
 package com.majo.shikimori.di.module
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.majo.shikimori.dagger.anvil.AppScope
+import com.majo.shikimori.anvil.AppScope
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
