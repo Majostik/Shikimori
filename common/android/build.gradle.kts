@@ -9,5 +9,5 @@ dependencies {
     api(libs.lifecycleLivedataKtx)
     api(libs.activityKtx)
     api(libs.fragmentKtx)
-    implementation(projects.common.dagger)
+    implementation(projects.common.anvil)
 }

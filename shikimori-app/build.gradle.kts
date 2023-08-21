@@ -55,6 +55,7 @@ dependencies {
     implementation(projects.common.retrofit)
     implementation(projects.common.android)
     implementation(projects.common.navigation)
+    implementation(projects.common.anvil)
 
     implementation(libs.kotlinxSerialization)
     implementation(libs.retrofit.converter.kotlinxSerialization)

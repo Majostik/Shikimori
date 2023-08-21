@@ -6,5 +6,5 @@ plugins {
 dependencies {
     api(libs.retrofit)
     api(libs.kotlinxSerialization)
-    implementation(projects.common.dagger)
+    implementation(projects.common.anvil)
 }

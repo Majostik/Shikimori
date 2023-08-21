@@ -3,8 +3,8 @@ package com.majo.shikimori.anime_details
 import com.majo.anime_details.AnimeDetailsApi
 import com.majo.shikimori.android.ErrorConverter
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsInternalAction
+import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.majo.shikimori.dagger.anvil.ScreenScope
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

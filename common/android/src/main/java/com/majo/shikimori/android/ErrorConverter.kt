@@ -1,7 +1,7 @@
 package com.majo.shikimori.android
 
 import android.content.res.Resources
-import com.majo.shikimori.dagger.anvil.AppScope
+import com.majo.shikimori.anvil.AppScope
 import com.squareup.anvil.annotations.ContributesBinding
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

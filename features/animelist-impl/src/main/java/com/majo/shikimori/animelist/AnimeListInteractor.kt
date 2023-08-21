@@ -3,10 +3,8 @@ package com.majo.shikimori.animelist
 import com.majo.shikimori.android.ErrorConverter
 import com.majo.shikimori.animelist.mvi.AnimeListActor.Companion.INIT_PAGE
 import com.majo.shikimori.animelist.mvi.entity.AnimeListInternalAction
-import com.majo.shikimori.dagger.PerActivity
+import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.majo.shikimori.dagger.anvil.ActivityScope
-import com.majo.shikimori.dagger.anvil.ScreenScope
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

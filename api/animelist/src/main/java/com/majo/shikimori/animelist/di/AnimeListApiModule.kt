@@ -1,7 +1,7 @@
 package com.majo.shikimori.animelist.di
 
 import com.majo.shikimori.animelist.AnimeListApi
-import com.majo.shikimori.dagger.anvil.AppScope
+import com.majo.shikimori.anvil.AppScope
 import com.majo.shikimori.retrofit.RetrofitFactory
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
