@@ -1,12 +1,10 @@
 plugins {
     id("convention.android-library")
     id("convention.dagger")
+    id("kotlinx-serialization")
 }
 
 dependencies {
-    api(libs.appcompat)
-    api(libs.coreKtx)
-    api(libs.activityKtx)
-    api(libs.fragmentKtx)
     implementation(projects.common.anvil)
+    implementation(projects.common.retrofit)
 }

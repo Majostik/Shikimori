@@ -57,8 +57,7 @@ fun HomeScreen() {
     }
 
     showBottomBar = when (navBackStackEntry?.destination?.route) {
-        NavigationItem.AnimeList.route -> true
-        NavigationItem.MangaList.route -> true
+        NavigationItem.AnimeList.route, NavigationItem.MangaList.route  -> true
         else -> false
     }
 

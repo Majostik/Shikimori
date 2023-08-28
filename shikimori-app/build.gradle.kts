@@ -41,6 +41,7 @@ dependencies {
     implementation(projects.api.animelist)
     implementation(projects.api.animeDetails)
     implementation(projects.api.mangaList)
+    implementation(projects.api.auth)
 
     implementation(projects.features.home)
     implementation(projects.features.animelistPublic)

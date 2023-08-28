@@ -9,7 +9,9 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -18,18 +20,38 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient
-    ): Retrofit {
+    fun provideJsonKotlinxSerializationFactory(): Converter.Factory {
         val contentType = "application/json".toMediaType()
         val json = Json { ignoreUnknownKeys = true }
+        return json.asConverterFactory(contentType)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        jsonConverterFactory: Converter.Factory
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://shikimori.one/api/")
-            .addConverterFactory(json.asConverterFactory(contentType))
+            .addConverterFactory(jsonConverterFactory)
             .client(okHttpClient)
             .build()
     }
 
+    @Provides
+    @Singleton
+    @Named("auth")
+    fun provideAuthRetrofit(
+        okHttpClient: OkHttpClient,
+        jsonConverterFactory: Converter.Factory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://shikimori.one/oauth/")
+            .addConverterFactory(jsonConverterFactory)
+            .client(okHttpClient)
+            .build()
+    }
 
     @Provides
     @Singleton

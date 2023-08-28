@@ -10,9 +10,3 @@ interface RetrofitFactory {
     fun <T> create(service: Class<T>): T
 }
 
-@ContributesBinding(AppScope::class)
-class RetrofitFactoryImpl @Inject constructor(private val retrofit: Retrofit): RetrofitFactory {
-
-    override fun <T> create(service: Class<T>): T = retrofit.create(service)
-
-}
