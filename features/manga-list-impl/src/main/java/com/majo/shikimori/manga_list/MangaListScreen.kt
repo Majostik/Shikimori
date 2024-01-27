@@ -41,30 +41,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.TopAppBarWithSearch
-import com.majo.shikimori.dagger.daggerViewModel
-import com.majo.shikimori.dagger.findComponentDependencies
-import com.majo.shikimori.manga_list.di.DaggerMangaListComponent
+import com.majo.shikimori.manga_list.impl.R
 import com.majo.shikimori.manga_list.model.Manga
 import com.majo.shikimori.manga_list.mvi.entity.MangaListAction
 import com.majo.shikimori.manga_list.mvi.entity.MangaListOneTimeEvent
-import com.majo.shikimori.manga_list_impl.R
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MangaListScreen(navController: NavHostController) {
     val context = LocalContext.current
 
-    val component = DaggerMangaListComponent.factory().create(context.findComponentDependencies())
-    val viewModel = daggerViewModel {
-        component.viewModel()
-    }
+    val viewModel = hiltViewModel<MangaListViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
+    viewModel.accept(MangaListAction.Init)
 
     val lazyGridListState = rememberLazyGridState()
 
@@ -85,6 +80,8 @@ fun MangaListScreen(navController: NavHostController) {
                 is MangaListOneTimeEvent.ShowError -> {
                     Toast.makeText(context, event.error, Toast.LENGTH_SHORT).show()
                 }
+
+                else -> {}
             }
         }
     }

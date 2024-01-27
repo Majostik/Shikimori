@@ -34,11 +34,10 @@ import com.majo.shikimori.home.di.DaggerHomeListComponent
 import com.majo.shikimori.manga_list.MangaListScreenProvider
 import com.majo.shikimori.navigation.NavigationItem
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
-    val homeComponent = DaggerHomeListComponent.factory().create(context.findComponentDependencies())
+    val homeComponent = DaggerHomeListComponent.builder().dependencies(context.findComponentDependencies()).build()
     val animeListScreenProvider = homeComponent.animeListScreenProvider()
     val mangaListScreenProvider = homeComponent.mangaListScreenProvider()
     val navController = rememberNavController()

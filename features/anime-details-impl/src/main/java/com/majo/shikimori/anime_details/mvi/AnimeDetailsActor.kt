@@ -11,7 +11,6 @@ import javax.inject.Inject
 
 class AnimeDetailsActor @Inject constructor(
     private val interactor: AnimeDetailsInteractor,
-    private val id: Long
 ): Actor<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState> {
     override fun process(
         action: AnimeDetailsAction,
@@ -21,7 +20,7 @@ class AnimeDetailsActor @Inject constructor(
             emit(AnimeDetailsInternalAction.Close)
         }
         is AnimeDetailsAction.LoadData -> {
-            interactor.getAnimeDetails(id)
+            interactor.getAnimeDetails(action.id)
         }
     }
 

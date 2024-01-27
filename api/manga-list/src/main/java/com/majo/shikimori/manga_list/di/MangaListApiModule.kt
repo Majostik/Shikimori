@@ -1,15 +1,15 @@
 package com.majo.shikimori.manga_list.di
 
-import com.majo.shikimori.anvil.AppScope
 import com.majo.shikimori.manga_list.MangaListApi
 import com.majo.shikimori.retrofit.RetrofitFactory
-import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@ContributesTo(AppScope::class)
+@InstallIn(SingletonComponent::class)
 object MangaListApiModule {
 
     @Provides

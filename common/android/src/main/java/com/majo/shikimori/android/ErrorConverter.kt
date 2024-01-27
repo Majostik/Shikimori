@@ -1,8 +1,6 @@
 package com.majo.shikimori.android
 
 import android.content.res.Resources
-import com.majo.shikimori.anvil.AppScope
-import com.squareup.anvil.annotations.ContributesBinding
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -12,7 +10,6 @@ interface ErrorConverter {
     fun convertError(throwable: Throwable?): String
 }
 
-@ContributesBinding(AppScope::class)
 class ErrorConverterImpl @Inject constructor(
     private val resources: Resources
 ): ErrorConverter {

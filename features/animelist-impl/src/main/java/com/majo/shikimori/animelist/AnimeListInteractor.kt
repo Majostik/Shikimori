@@ -3,9 +3,7 @@ package com.majo.shikimori.animelist
 import com.majo.shikimori.android.ErrorConverter
 import com.majo.shikimori.animelist.mvi.AnimeListActor.Companion.INIT_PAGE
 import com.majo.shikimori.animelist.mvi.entity.AnimeListInternalAction
-import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -15,8 +13,6 @@ interface AnimeListInteractor {
     fun loadAnime(page: Int, limit: Int, query: String? = null): Flow<AnimeListInternalAction>
 }
 
-@ContributesBinding(ScreenScope::class)
-@PerScreen
 class AnimeListInteractorImpl @Inject constructor(
     private val animeListApi: AnimeListApi,
     private val errorConverter: ErrorConverter

@@ -17,7 +17,7 @@ class MangaListActor @Inject constructor(
         action: MangaListAction,
         previousState: MangaListState
     ): Flow<MangaListInternalAction> = when(action){
-        is MangaListAction.Retry -> interactor.loadManga(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
+        is MangaListAction.Retry, is MangaListAction.Init -> interactor.loadManga(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
         is MangaListAction.LoadNextPage -> interactor.loadManga(page = action.page, limit = DEFAULT_LIMIT, query = previousState.query)
         is MangaListAction.Search -> merge(
             flow { emit(MangaListInternalAction.Clear) },

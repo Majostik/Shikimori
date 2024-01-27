@@ -1,21 +1,16 @@
 package com.majo.shikimori.manga_list.di
 
-import com.majo.shikimori.anvil.ScreenScope
-import com.majo.shikimori.dagger.PerScreen
-import com.majo.shikimori.manga_list.MangaListViewModel
-import com.majo.shikimori.manga_list.mvi.MangaListFeatureBuilder
-import com.squareup.anvil.annotations.ContributesTo
+import com.majo.shikimori.manga_list.MangaListInteractor
+import com.majo.shikimori.manga_list.MangaListInteractorImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@ContributesTo(ScreenScope::class)
-class MangaListModule {
+@InstallIn(SingletonComponent::class)
+interface MangaListModule {
 
-    @Provides
-    @PerScreen
-    fun provideViewModel(featureBuilder: MangaListFeatureBuilder): MangaListViewModel {
-        return MangaListViewModel(featureBuilder)
-    }
-
+    @Binds
+    fun bindsMangaListInteractor(interactor: MangaListInteractorImpl): MangaListInteractor
 }

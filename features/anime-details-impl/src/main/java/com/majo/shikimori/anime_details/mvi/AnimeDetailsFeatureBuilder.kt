@@ -9,15 +9,13 @@ import com.majo.shikimori.mvi.FeatureBuilder
 import javax.inject.Inject
 
 class AnimeDetailsFeatureBuilder @Inject constructor(
-    bootstrap: AnimeDetailsBootstrap,
     reducer: AnimeDetailsReducer,
     actor: AnimeDetailsActor,
     oneTimeEventReducer: AnimeDetailsOneTimeEventReducer
 ): FeatureBuilder<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState, AnimeDetailsOneTimeEvent>(
     initialState = INITIAL,
     setupFunc = {
-        withBootstrap(bootstrap)
-            .withActor(actor)
+            withActor(actor)
             .withReducer(reducer)
             .withEventReducer(oneTimeEventReducer)
     }

@@ -1,15 +1,15 @@
 package com.majo.shikimori.animelist.di
 
 import com.majo.shikimori.animelist.AnimeListApi
-import com.majo.shikimori.anvil.AppScope
 import com.majo.shikimori.retrofit.RetrofitFactory
-import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@ContributesTo(AppScope::class)
+@InstallIn(SingletonComponent::class)
 object AnimeListApiModule {
 
     @Provides

@@ -1,4 +1,3 @@
-enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -6,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven("https://plugins.gradle.org/m2/")
     }
 }
 dependencyResolutionManagement {
@@ -30,11 +30,9 @@ include (":common:mvi")
 include (":api:anime-details")
 include (":features:anime-details-impl")
 include (":common:navigation")
-include(":features")
 include(":features:home")
 include(":features:animelist-public")
 include(":features:anime-details-public")
 include(":api:manga-list")
 include(":features:manga-list-public")
 include(":features:manga-list-impl")
-include(":common:anvil")

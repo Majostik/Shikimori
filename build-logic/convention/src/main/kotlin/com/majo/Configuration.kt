@@ -4,5 +4,5 @@ object Configuration {
 
     const val implementation = "implementation"
     const val api = "api"
-    const val kapt = "kapt"
+    const val ksp = "ksp"
 }

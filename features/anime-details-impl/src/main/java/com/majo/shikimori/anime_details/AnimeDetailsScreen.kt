@@ -52,21 +52,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.majo.anime_details.model.AnimeDetails
 import com.majo.shikimori.android.LoadableState
-import com.majo.shikimori.animeDetailsImpl.R
-import com.majo.shikimori.anime_details.di.DaggerAnimeDetailsComponent
+import com.majo.shikimori.anime_details.impl.R
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsAction
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsOneTimeEvent
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsState
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.ErrorState
 import com.majo.shikimori.compose.components.LoadingState
-import com.majo.shikimori.dagger.daggerViewModel
-import com.majo.shikimori.dagger.findComponentDependencies
-import kotlinx.coroutines.flow.Flow
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -78,15 +75,10 @@ fun AnimeDetailsScreen(
 ) {
     val context = LocalContext.current
 
-    val component = DaggerAnimeDetailsComponent.factory().create(
-        dependencies = context.findComponentDependencies(),
-        id = args.id
-    )
-    val viewModel = daggerViewModel {
-        component.viewModel()
-    }
+    val viewModel = hiltViewModel<AnimeDetailsViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
+    viewModel.accept(AnimeDetailsAction.LoadData(args.id))
 
     LaunchedEffect(events) {
         events.collect { event ->
@@ -127,7 +119,7 @@ fun AnimeDetailsScreen(
                     }
                     is LoadableState.Error -> {
                         ErrorState(data.errorMessage, paddingValues) {
-                            viewModel.accept(AnimeDetailsAction.LoadData)
+                            viewModel.accept(AnimeDetailsAction.LoadData(args.id))
                         }
                     }
                 }

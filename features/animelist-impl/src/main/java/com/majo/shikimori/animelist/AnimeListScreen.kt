@@ -46,16 +46,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.majo.shikimori.anime_list.impl.R
 import com.majo.shikimori.animelist.di.DaggerAnimeListComponent
 import com.majo.shikimori.animelist.model.Anime
 import com.majo.shikimori.animelist.mvi.entity.AnimeListAction
 import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
-import com.majo.shikimori.animelistImpl.R
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.TopAppBarWithSearch
-import com.majo.shikimori.dagger.daggerViewModel
 import com.majo.shikimori.dagger.findComponentDependencies
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -63,15 +63,12 @@ import com.majo.shikimori.dagger.findComponentDependencies
 @Composable
 fun AnimeListScreen(navController: NavHostController) {
     val context = LocalContext.current
+    val animeListComponent = DaggerAnimeListComponent.builder().dependencies(context.findComponentDependencies()).build()
 
-    val component = DaggerAnimeListComponent.factory().create(context.findComponentDependencies())
-    val viewModel = daggerViewModel {
-        component.viewModel()
-    }
+    val viewModel = hiltViewModel<AnimeListViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
-
-    val animeDetailsScreenProvider = component.animeDetailsScreenProvider()
+    viewModel.accept(AnimeListAction.Init)
 
     val lazyGridListState = rememberLazyGridState()
 
@@ -93,7 +90,7 @@ fun AnimeListScreen(navController: NavHostController) {
                     Toast.makeText(context, event.error, Toast.LENGTH_SHORT).show()
                 }
                 is AnimeListOneTimeEvent.OpenScreen -> {
-                    navController.navigate(animeDetailsScreenProvider.animeDetailsScreen(event.name, event.id))
+                    navController.navigate(animeListComponent.animeDetailsScreenProvider().animeDetailsScreen(event.name, event.id))
                 }
             }
         }

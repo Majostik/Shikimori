@@ -1,21 +1,16 @@
 package com.majo.shikimori.animelist.di
 
-import com.majo.shikimori.animelist.AnimeListViewModel
-import com.majo.shikimori.animelist.mvi.AnimeListFeatureBuilder
-import com.majo.shikimori.anvil.ScreenScope
-import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.ContributesTo
+import com.majo.shikimori.animelist.AnimeListInteractor
+import com.majo.shikimori.animelist.AnimeListInteractorImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@ContributesTo(ScreenScope::class)
-class AnimeListModule {
+@InstallIn(SingletonComponent::class)
+interface AnimeListModule {
 
-    @Provides
-    @PerScreen
-    fun provideViewModel(featureBuilder: AnimeListFeatureBuilder): AnimeListViewModel {
-        return AnimeListViewModel(featureBuilder)
-    }
-
+    @Binds
+    fun bindsAnimeListInteractor(interactor: AnimeListInteractorImpl): AnimeListInteractor
 }

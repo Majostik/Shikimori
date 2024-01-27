@@ -10,15 +10,13 @@ import com.majo.shikimori.mvi.FeatureBuilder
 import javax.inject.Inject
 
 class MangaListFeatureBuilder @Inject constructor(
-    bootstrap: MangaListBootstrap,
     reducer: MangaListReducer,
     actor: MangaListActor,
     oneTimeEventReducer: MangaListOneTimeEventReducer
 ): FeatureBuilder<MangaListAction, MangaListInternalAction, MangaListState, MangaListOneTimeEvent>(
     initialState = INITIAL,
     setupFunc = {
-        withBootstrap(bootstrap)
-            .withReducer(reducer)
+        withReducer(reducer)
             .withActor(actor)
             .withEventReducer(oneTimeEventReducer)
     }

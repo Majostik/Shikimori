@@ -1,22 +1,16 @@
 package com.majo.shikimori.anime_details.di
 
-import com.majo.shikimori.anime_details.AnimeDetailsViewModel
-import com.majo.shikimori.anime_details.mvi.AnimeDetailsFeatureBuilder
-import com.majo.shikimori.anvil.AppScope
-import com.majo.shikimori.anvil.ScreenScope
-import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.ContributesTo
+import com.majo.shikimori.anime_details.AnimeDetailsInteractor
+import com.majo.shikimori.anime_details.AnimeDetailsInteractorImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@ContributesTo(ScreenScope::class)
-class AnimeDetailsModule {
+@InstallIn(SingletonComponent::class)
+interface AnimeDetailsModule {
 
-    @Provides
-    @PerScreen
-    fun provideViewModel(featureBuilder: AnimeDetailsFeatureBuilder): AnimeDetailsViewModel {
-        return AnimeDetailsViewModel(featureBuilder)
-    }
-
+    @Binds
+    fun bindsAnimeDetailsInteractor(interactor: AnimeDetailsInteractorImpl): AnimeDetailsInteractor
 }

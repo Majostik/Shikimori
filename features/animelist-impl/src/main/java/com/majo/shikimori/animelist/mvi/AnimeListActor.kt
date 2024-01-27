@@ -17,7 +17,7 @@ class AnimeListActor @Inject constructor(
         action: AnimeListAction,
         previousState: AnimeListState
     ): Flow<AnimeListInternalAction> = when(action){
-        is AnimeListAction.Retry -> interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
+        is AnimeListAction.Retry, is AnimeListAction.Init -> interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
         is AnimeListAction.LoadNextPage -> interactor.loadAnime(page = action.page, limit = DEFAULT_LIMIT, query = previousState.query)
         is AnimeListAction.Search -> merge(
             flow { emit(AnimeListInternalAction.Clear) },
