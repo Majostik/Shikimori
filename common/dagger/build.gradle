@@ -1,9 +1,0 @@
-plugins {
-    id("convention.android-library")
-    id("convention.dagger")
-    id("convention.compose")
-}
-
-dependencies {
-    implementation(libs.appcompat)
-}

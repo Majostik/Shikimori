@@ -8,14 +8,9 @@ abstract class FeatureBuilder<Action: Any, InternalAction: Any, State: Any, OneT
     private val initialState: State,
     private val setupFunc: FeatureBuilder<Action, InternalAction, State, OneTimeEvent>.() -> Unit
 ) {
-    private var bootstrap: Bootstrap<InternalAction> = Bootstrap { emptyFlow() }
     private var actor: Actor<Action, InternalAction, State> = Actor { _, _ -> emptyFlow() }
     private var eventProducer: OneTimeEventProducer<InternalAction, OneTimeEvent> = OneTimeEventProducer { null }
     private var reducer: Reducer<InternalAction, State> = Reducer { _, state ->  state }
-
-    fun withBootstrap(bootstrap: Bootstrap<InternalAction>) = apply {
-        this.bootstrap = bootstrap
-    }
 
     fun withActor(actor: Actor<Action, InternalAction, State> ) = apply {
         this.actor = actor
@@ -35,7 +30,6 @@ abstract class FeatureBuilder<Action: Any, InternalAction: Any, State: Any, OneT
         this.setupFunc()
         return Feature(
             initialState = restoredState ?: initialState,
-            bootstrap = bootstrap,
             actor = actor,
             eventProducer = eventProducer,
             reducer = reducer

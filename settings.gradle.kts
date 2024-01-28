@@ -1,4 +1,3 @@
-enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -6,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven("https://plugins.gradle.org/m2/")
     }
 }
 dependencyResolutionManagement {
@@ -16,25 +16,20 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Shikimori"
-include(":shikimori-app")
-include (":common:dagger")
-include (":common:android")
-include (":common:common")
-include (":common:android")
-include (":features:animelist-impl")
-include (":common:retrofit")
-include (":common:design-system")
-include (":api:animelist")
 includeBuild("build-logic")
-include (":common:mvi")
-include (":api:anime-details")
-include (":features:anime-details-impl")
-include (":common:navigation")
-include(":features")
+include(":app")
+include(":common:dagger")
+include(":common:core")
+include(":common:design_system")
+include(":common:mvi")
+include(":common:navigation")
 include(":features:home")
-include(":features:animelist-public")
-include(":features:anime-details-public")
-include(":api:manga-list")
-include(":features:manga-list-public")
-include(":features:manga-list-impl")
-include(":common:anvil")
+include(":remote:anime_list")
+include(":features:anime_list:api")
+include(":features:anime_list:impl")
+include(":remote:anime_details")
+include(":features:anime_details:api")
+include(":features:anime_details:impl")
+include(":remote:manga_list")
+include(":features:manga_list:api")
+include(":features:manga_list:impl")

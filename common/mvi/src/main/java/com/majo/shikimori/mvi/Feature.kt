@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.onStart
 @OptIn(FlowPreview::class)
 class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> constructor(
     private val initialState: State,
-    private val bootstrap: Bootstrap<InternalAction>,
     private val actor: Actor<Action, InternalAction, State>,
     private val eventProducer: OneTimeEventProducer<InternalAction, OneTimeEvent>,
     private val reducer: Reducer<InternalAction, State>
@@ -35,10 +34,7 @@ class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> c
         private set
 
     private val stateFlow: Flow<State> =
-        merge(
-            observeBoostrap(),
             observeActor()
-        )
             .onEach { internalAction ->
                 produceEvent(internalAction)
             }
@@ -50,10 +46,6 @@ class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> c
             }
             .distinctUntilChanged()
 
-    private fun observeBoostrap(): Flow<InternalAction> {
-        return bootstrap
-            .produce()
-    }
 
     private fun observeActor(): Flow<InternalAction> {
         return actionsFlow

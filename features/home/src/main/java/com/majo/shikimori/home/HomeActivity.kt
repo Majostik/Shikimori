@@ -3,10 +3,10 @@ package com.majo.shikimori.home
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.majo.shikimori.dagger.AppComponentDependencies
-import com.majo.shikimori.dagger.HasComponentDependencies
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeActivity : AppCompatActivity(), HasComponentDependencies {
+@AndroidEntryPoint
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +15,4 @@ class HomeActivity : AppCompatActivity(), HasComponentDependencies {
         }
     }
 
-    override fun getDependency(): AppComponentDependencies {
-        return (application as HasComponentDependencies).getDependency()
-    }
 }

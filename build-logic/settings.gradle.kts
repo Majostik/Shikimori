@@ -1,10 +1,10 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://plugins.gradle.org/m2/")
+        gradlePluginPortal()
     }
     versionCatalogs {
         create("libs") {
