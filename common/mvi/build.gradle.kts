@@ -1,5 +1,5 @@
 plugins {
-    id("convention.android-library")
+    alias(libs.plugins.shikimori.android.library)
 }
 
 android {

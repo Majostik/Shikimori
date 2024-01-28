@@ -36,5 +36,29 @@ gradlePlugin {
             id = "shikimori.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidApplication") {
+            id = "shikimori.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+        register("androidLibrary") {
+            id = "shikimori.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("compose") {
+            id = "shikimori.compose"
+            implementationClass = "ComposeConventionPlugin"
+        }
+        register("kotlinxSerialization") {
+            id = "shikimori.kotlinx.serialization"
+            implementationClass = "KotlinxSerializationConventionPlugin"
+        }
+        register("feature") {
+            id = "shikimori.feature"
+            implementationClass = "FeatureConventionPlugin"
+        }
+        register("remoteApi") {
+            id = "shikimori.remote.api"
+            implementationClass = "RemoteApiConventionPlugin"
+        }
     }
 }

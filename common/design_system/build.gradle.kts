@@ -1,7 +1,6 @@
 plugins {
-    id("convention.android-library")
-    id("kotlin-android")
-    id("convention.compose")
+    alias(libs.plugins.shikimori.android.library)
+    alias(libs.plugins.shikimori.compose)
 }
 
 android {

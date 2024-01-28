@@ -1,5 +1,5 @@
 plugins {
-    id("convention.android-library")
+    alias(libs.plugins.shikimori.android.library)
     alias(libs.plugins.shikimori.android.hilt)
 }
 
@@ -8,5 +8,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
+    implementation(libs.hilt)
 }

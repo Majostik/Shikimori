@@ -2,7 +2,6 @@ package com.majo.shikimori.dagger
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import androidx.fragment.app.Fragment
 import dagger.MapKey
 import kotlin.reflect.KClass

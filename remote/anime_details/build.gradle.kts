@@ -1,14 +1,7 @@
 plugins {
-    id("convention.android-library")
-    id("kotlinx-serialization")
-    alias(libs.plugins.shikimori.android.hilt)
+    alias(libs.plugins.shikimori.remote.api)
 }
 
 android {
     namespace = "com.majo.shikimori.api.anime_details"
-}
-
-dependencies {
-    implementation(libs.retrofit)
-    implementation(libs.kotlinxSerialization)
 }

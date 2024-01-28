@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AnimeDetailsScreenProviderModule {
 
-
     @Provides
     @Singleton
     fun provideAnimeDetailsScreenProvider(): AnimeDetailsScreenProvider {

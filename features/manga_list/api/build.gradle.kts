@@ -1,6 +1,5 @@
 plugins {
-   id("convention.android-library")
-   alias(libs.plugins.shikimori.android.hilt)
+   alias(libs.plugins.shikimori.android.library)
 }
 
 android {
@@ -10,5 +9,4 @@ android {
 
 dependencies {
    implementation(libs.compose.navigation)
-   implementation(projects.common.navigation)
 }
