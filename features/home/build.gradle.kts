@@ -2,7 +2,14 @@ plugins {
     id("convention.android-library")
     id("convention.dagger")
     id("convention.compose")
+    id("com.squareup.anvil")
+
 }
+
+android {
+    namespace = "com.majo.shikimori.home"
+}
+
 
 dependencies {
     implementation(projects.common.dagger)

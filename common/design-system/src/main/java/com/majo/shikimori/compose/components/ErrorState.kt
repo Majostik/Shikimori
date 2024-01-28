@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.majo.shikimori.compose.R
+import com.majo.shikimori.designsystem.R
 
 @Composable
 fun ErrorState(error: String, paddingValues: PaddingValues, onRetryClick:() -> Unit) {

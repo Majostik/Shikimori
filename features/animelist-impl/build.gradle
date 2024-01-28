@@ -2,7 +2,13 @@ plugins {
     id("convention.android-library")
     id("convention.dagger")
     id("convention.compose")
+    id("com.squareup.anvil")
 }
+
+android {
+    namespace = "com.majo.shikimori.animelist.impl"
+}
+
 
 dependencies {
     implementation(projects.api.animelist)

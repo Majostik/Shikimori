@@ -49,10 +49,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.majo.shikimori.animelist.di.DaggerAnimeListComponent
+import com.majo.shikimori.animelist.impl.R
 import com.majo.shikimori.animelist.model.Anime
 import com.majo.shikimori.animelist.mvi.entity.AnimeListAction
 import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
-import com.majo.shikimori.animelistImpl.R
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.TopAppBarWithSearch
 import com.majo.shikimori.dagger.daggerViewModel
