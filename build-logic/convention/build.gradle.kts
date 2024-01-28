@@ -23,7 +23,6 @@ dependencies {
 
 }
 
-@Suppress("UsePropertyAccessSyntax")
 tasks {
     validatePlugins {
         enableStricterValidation = true

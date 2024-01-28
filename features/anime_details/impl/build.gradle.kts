@@ -5,18 +5,19 @@ plugins {
 }
 
 android {
-    namespace = "com.majo.shikimori.home"
+    namespace = "com.majo.shikimori.anime_details.impl"
 }
 
 dependencies {
+    implementation(projects.remote.animeDetails)
     implementation(projects.common.dagger)
     implementation(projects.common.core)
     implementation(projects.common.navigation)
-    implementation(projects.common.mvi)
     implementation(projects.common.designSystem)
-    implementation(projects.features.animeList.api)
-    implementation(projects.features.mangaList.api)
-    
+    implementation(projects.common.mvi)
+
+    implementation(projects.features.animeDetails.api)
+
     implementation(libs.lifecycleViewModel)
     implementation(libs.hiltNavigation)
 }
