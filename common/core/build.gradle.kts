@@ -1,5 +1,5 @@
 plugins {
-    id("convention.android-library")
+    alias(libs.plugins.shikimori.android.library)
 }
 
 android {
@@ -7,9 +7,5 @@ android {
 }
 
 dependencies {
-    api(libs.appcompat)
-    api(libs.coreKtx)
-    api(libs.activityKtx)
-    api(libs.fragmentKtx)
     implementation(libs.hilt)
 }

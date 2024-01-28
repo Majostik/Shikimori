@@ -1,6 +1,6 @@
 plugins {
-    id("convention.android-library")
-    id("convention.compose")
+    alias(libs.plugins.shikimori.android.library)
+    alias(libs.plugins.shikimori.compose)
 }
 
 android {

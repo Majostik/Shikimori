@@ -1,6 +1,5 @@
 package com.majo.shikimori.mvi
 
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.AbstractFlow
 import kotlinx.coroutines.flow.Flow
@@ -9,11 +8,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 
-@OptIn(FlowPreview::class)
 class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> constructor(
     private val initialState: State,
     private val actor: Actor<Action, InternalAction, State>,

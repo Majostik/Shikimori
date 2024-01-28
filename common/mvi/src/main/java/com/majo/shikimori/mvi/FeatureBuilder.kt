@@ -1,8 +1,6 @@
 package com.majo.shikimori.mvi
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.emptyFlow
-import kotlin.coroutines.EmptyCoroutineContext
 
 abstract class FeatureBuilder<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any>(
     private val initialState: State,
