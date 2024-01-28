@@ -1,15 +1,13 @@
 package com.majo.shikimori.anime_details.di
 
 import com.majo.shikimori.anime_details.AnimeDetailsViewModel
-import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
 
-@MergeComponent(
-    scope = ScreenScope::class,
+@Component(
     dependencies = [AnimeDetailsDependencies::class],
+    modules = [AnimeDetailsModule::class]
 )
 @PerScreen
 interface AnimeDetailsComponent {

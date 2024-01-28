@@ -3,7 +3,7 @@ package com.majo.shikimori.home
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.majo.shikimori.dagger.AppComponentDependencies
+import com.majo.shikimori.dagger.ComponentDependenciesProvider
 import com.majo.shikimori.dagger.HasComponentDependencies
 
 class HomeActivity : AppCompatActivity(), HasComponentDependencies {
@@ -15,7 +15,6 @@ class HomeActivity : AppCompatActivity(), HasComponentDependencies {
         }
     }
 
-    override fun getDependency(): AppComponentDependencies {
-        return (application as HasComponentDependencies).getDependency()
-    }
+    override val dependencies: ComponentDependenciesProvider
+        get() = (application as HasComponentDependencies).dependencies
 }

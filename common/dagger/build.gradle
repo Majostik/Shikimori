@@ -4,6 +4,10 @@ plugins {
     id("convention.compose")
 }
 
+android {
+    namespace("com.majo.shikimori.dagger")
+}
+
 dependencies {
     implementation(libs.appcompat)
 }

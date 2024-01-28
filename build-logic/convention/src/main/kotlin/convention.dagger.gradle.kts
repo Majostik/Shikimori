@@ -3,7 +3,6 @@ import com.majo.withVersionCatalog
 
 plugins {
     id("convention.kapt")
-    id("com.squareup.anvil")
 }
 
 project.withVersionCatalog { libs ->

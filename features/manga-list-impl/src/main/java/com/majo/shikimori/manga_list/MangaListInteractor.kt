@@ -1,11 +1,9 @@
 package com.majo.shikimori.manga_list
 
 import com.majo.shikimori.android.ErrorConverter
-import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
 import com.majo.shikimori.manga_list.mvi.MangaListActor.Companion.INIT_PAGE
 import com.majo.shikimori.manga_list.mvi.entity.MangaListInternalAction
-import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -15,8 +13,6 @@ interface MangaListInteractor {
     fun loadManga(page: Int, limit: Int, query: String? = null): Flow<MangaListInternalAction>
 }
 
-@ContributesBinding(ScreenScope::class)
-@PerScreen
 class MangaListInteractorImpl @Inject constructor(
     private val aangaListApi: MangaListApi,
     private val errorConverter: ErrorConverter

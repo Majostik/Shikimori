@@ -4,7 +4,12 @@ plugins {
     id("kotlinx-serialization")
 }
 
+android {
+    namespace = "com.majo.shikimori.api.animelist"
+}
+
+
 dependencies {
-    implementation(projects.common.anvil)
+    implementation(projects.common.dagger)
     implementation(projects.common.retrofit)
 }

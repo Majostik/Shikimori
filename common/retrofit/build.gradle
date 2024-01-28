@@ -3,8 +3,11 @@ plugins {
     id("convention.dagger")
 }
 
+android {
+    namespace("com.majo.shikimori.retrofit")
+}
+
 dependencies {
     api(libs.retrofit)
     api(libs.kotlinxSerialization)
-    implementation(projects.common.anvil)
 }

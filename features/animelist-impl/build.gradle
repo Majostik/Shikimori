@@ -4,12 +4,16 @@ plugins {
     id("convention.compose")
 }
 
+android {
+    namespace = "com.majo.shikimori.animelist.impl"
+}
+
+
 dependencies {
     implementation(projects.api.animelist)
     implementation(projects.features.animelistPublic)
     implementation(projects.features.animeDetailsPublic)
     implementation(projects.common.dagger)
-    implementation(projects.common.anvil)
     implementation(projects.common.android)
     implementation(projects.common.navigation)
     implementation(projects.common.mvi)

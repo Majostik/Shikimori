@@ -56,11 +56,11 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.majo.anime_details.model.AnimeDetails
 import com.majo.shikimori.android.LoadableState
-import com.majo.shikimori.animeDetailsImpl.R
 import com.majo.shikimori.anime_details.di.DaggerAnimeDetailsComponent
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsAction
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsOneTimeEvent
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsState
+import com.majo.shikimori.animedetails.impl.R
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.ErrorState
 import com.majo.shikimori.compose.components.LoadingState

@@ -3,9 +3,7 @@ package com.majo.shikimori.anime_details
 import com.majo.anime_details.AnimeDetailsApi
 import com.majo.shikimori.android.ErrorConverter
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsInternalAction
-import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -15,8 +13,6 @@ interface AnimeDetailsInteractor {
     fun getAnimeDetails(id: Long): Flow<AnimeDetailsInternalAction>
 }
 
-@ContributesBinding(ScreenScope::class)
-@PerScreen
 class AnimeDetailsInteractorImpl @Inject constructor(
     private val animeDetailsApi: AnimeDetailsApi,
     private val errorConverter: ErrorConverter

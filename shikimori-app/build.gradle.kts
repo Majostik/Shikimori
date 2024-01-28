@@ -8,11 +8,11 @@ plugins {
 
 android {
     namespace = "com.majo.shikimori"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.majo.shikimori"
         minSdk = 23
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -29,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
@@ -55,7 +55,6 @@ dependencies {
     implementation(projects.common.retrofit)
     implementation(projects.common.android)
     implementation(projects.common.navigation)
-    implementation(projects.common.anvil)
 
     implementation(libs.kotlinxSerialization)
     implementation(libs.retrofit.converter.kotlinxSerialization)

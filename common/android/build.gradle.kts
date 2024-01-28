@@ -3,11 +3,13 @@ plugins {
     id("convention.dagger")
 }
 
+android {
+    namespace = "com.majo.shikimori.android"
+}
+
 dependencies {
     api(libs.appcompat)
     api(libs.coreKtx)
-    api(libs.lifecycleLivedataKtx)
     api(libs.activityKtx)
     api(libs.fragmentKtx)
-    implementation(projects.common.anvil)
 }

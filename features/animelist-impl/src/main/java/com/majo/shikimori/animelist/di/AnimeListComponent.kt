@@ -2,14 +2,12 @@ package com.majo.shikimori.animelist.di
 
 import com.majo.shikimori.anime_details.AnimeDetailsScreenProvider
 import com.majo.shikimori.animelist.AnimeListViewModel
-import com.majo.shikimori.anvil.ScreenScope
 import com.majo.shikimori.dagger.PerScreen
-import com.squareup.anvil.annotations.MergeComponent
 import dagger.Component
 
-@MergeComponent(
-    scope = ScreenScope::class,
+@Component(
     dependencies = [AnimeListDependencies::class],
+    modules = [AnimeListModule::class]
 )
 @PerScreen
 interface AnimeListComponent {

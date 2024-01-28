@@ -51,7 +51,7 @@ import com.majo.shikimori.manga_list.di.DaggerMangaListComponent
 import com.majo.shikimori.manga_list.model.Manga
 import com.majo.shikimori.manga_list.mvi.entity.MangaListAction
 import com.majo.shikimori.manga_list.mvi.entity.MangaListOneTimeEvent
-import com.majo.shikimori.manga_list_impl.R
+import com.majo.shikimori.mangalist.impl.R
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
