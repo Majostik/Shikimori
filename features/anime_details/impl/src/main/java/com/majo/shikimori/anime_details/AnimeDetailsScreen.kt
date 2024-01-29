@@ -51,21 +51,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.majo.anime_details.model.AnimeDetails
-import com.majo.shikimori.core.LoadableState
 import com.majo.shikimori.anime_details.impl.R
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsAction
 import com.majo.shikimori.anime_details.mvi.entity.AnimeDetailsOneTimeEvent
 import com.majo.shikimori.compose.ShikimoriTheme
 import com.majo.shikimori.compose.components.ErrorState
 import com.majo.shikimori.compose.components.LoadingState
-
+import com.majo.shikimori.core.LoadableState
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimeDetailsScreen(
     navController: NavHostController,
-    args: AnimeDetailsArgs
+    args: AnimeDetailsArgs,
 ) {
     val context = LocalContext.current
 
@@ -79,7 +78,7 @@ fun AnimeDetailsScreen(
 
     LaunchedEffect(events) {
         events.collect { event ->
-            when(event) {
+            when (event) {
                 is AnimeDetailsOneTimeEvent.ShowError -> {
                     Toast.makeText(context, event.error, Toast.LENGTH_SHORT).show()
                 }
@@ -98,29 +97,29 @@ fun AnimeDetailsScreen(
                     navigationIcon = {
                         IconButton(onClick = {
                             viewModel.accept(AnimeDetailsAction.Back)
-                        }){
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
-                                contentDescription = "back"
+                                contentDescription = "back",
                             )
                         }
-                    }
+                    },
                 )
-            }) { paddingValues ->
-                when (val data = state.data) {
-                    is LoadableState.Loading -> {
-                        LoadingState(paddingValues)
-                    }
-                    is LoadableState.Loaded -> {
-                        AnimeDetailsContent(data.data, paddingValues)
-                    }
-                    is LoadableState.Error -> {
-                        ErrorState(data.errorMessage, paddingValues) {
-                            viewModel.accept(AnimeDetailsAction.LoadData(args.id))
-                        }
+            },
+        ) { paddingValues ->
+            when (val data = state.data) {
+                is LoadableState.Loading -> {
+                    LoadingState(paddingValues)
+                }
+                is LoadableState.Loaded -> {
+                    AnimeDetailsContent(data.data, paddingValues)
+                }
+                is LoadableState.Error -> {
+                    ErrorState(data.errorMessage, paddingValues) {
+                        viewModel.accept(AnimeDetailsAction.LoadData(args.id))
                     }
                 }
-
+            }
         }
     }
 }
@@ -130,11 +129,11 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(paddingValues)
+            .padding(paddingValues),
     ) {
         Row(
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             AsyncImage(
                 model = "https://shikimori.one/" + anime.image?.original,
@@ -142,7 +141,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .height(300.dp)
-                    .width(200.dp)
+                    .width(200.dp),
             )
             Column {
                 if (anime.kind != null) {
@@ -150,13 +149,13 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                         text = stringResource(id = R.string.anime_details_type),
                         color = Color.Gray,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                     Text(
                         text = anime.kind.toString(),
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                 }
                 if (anime.episodes != null && anime.episodes != 0) {
@@ -164,13 +163,13 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                         text = stringResource(id = R.string.anime_details_episodes),
                         color = Color.Gray,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                     Text(
                         text = anime.episodes.toString(),
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                 }
                 if (anime.status != null) {
@@ -178,13 +177,13 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                         text = stringResource(id = R.string.anime_details_status),
                         color = Color.Gray,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                     Text(
                         text = anime.status.toString(),
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                 }
                 if (anime.score != null && anime.score != 0.0) {
@@ -192,22 +191,22 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                         text = stringResource(id = R.string.anime_details_rating),
                         color = Color.Gray,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                     Text(
                         text = anime.score.toString(),
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp),
                     )
                 }
             }
         }
-        if (anime.name != null || anime.russianName != null)
+        if (anime.name != null || anime.russianName != null) {
             Text(
-                text = if (anime.name != null && anime.russianName != null)
+                text = if (anime.name != null && anime.russianName != null) {
                     stringResource(id = R.string.anime_details_name, anime.name.toString(), anime.russianName.toString())
-                else if (anime.name != null) {
+                } else if (anime.name != null) {
                     anime.name.toString()
                 } else {
                     anime.russianName.toString()
@@ -217,6 +216,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp),
             )
+        }
         Spacer(modifier = Modifier.height(8.dp))
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -225,7 +225,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
             items(anime.genres.orEmpty()) {
                 Box(
                     modifier = Modifier
-                        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(8.dp))
+                        .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(
                         text = it.russianName.toString(),
@@ -242,10 +242,11 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                 mutableStateOf(false)
             }
             Box(
-                modifier = if (expanded) Modifier
-                    .wrapContentHeight()
-                    .padding(horizontal = 16.dp)
-                else
+                modifier = if (expanded) {
+                    Modifier
+                        .wrapContentHeight()
+                        .padding(horizontal = 16.dp)
+                } else
                     Modifier
                         .height(150.dp)
                         .padding(horizontal = 16.dp),
@@ -265,18 +266,17 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
                     )
                 }
                 if (!expanded) {
-                        Text(
-                            text = stringResource(id = R.string.anime_details_show_description),
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-                                .background(Color.White)
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp)
-                                .clickable {
-                                    expanded = true
-                                }
-                        )
-
+                    Text(
+                        text = stringResource(id = R.string.anime_details_show_description),
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier
+                            .background(Color.White)
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp)
+                            .clickable {
+                                expanded = true
+                            },
+                    )
                 }
             }
         }
@@ -286,7 +286,7 @@ fun AnimeDetailsContent(anime: AnimeDetails, paddingValues: PaddingValues) {
 @Composable
 @Preview
 fun AnimeDetailsContentPreview(
-    @PreviewParameter(AnimeDetailsPreviewParameterProvider::class) data: AnimeDetails
+    @PreviewParameter(AnimeDetailsPreviewParameterProvider::class) data: AnimeDetails,
 ) {
     AnimeDetailsContent(anime = data, paddingValues = PaddingValues())
 }

@@ -3,7 +3,6 @@ package com.majo.anime_details.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class AnimeDetails(
     @SerialName("id") val id: Long,
@@ -23,7 +22,7 @@ data class Image(
     @SerialName("original") val original: String?,
     @SerialName("preview") val preview: String?,
     @SerialName("x96") val x96: String?,
-    @SerialName("x48") val x48: String?
+    @SerialName("x48") val x48: String?,
 )
 
 @Serializable

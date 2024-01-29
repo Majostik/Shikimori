@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 private val LightColors = lightColorScheme(
     primary = light_primary,
@@ -38,7 +37,6 @@ private val LightColors = lightColorScheme(
     outlineVariant = light_outlineVariant,
     scrim = light_scrim,
 )
-
 
 private val DarkColors = darkColorScheme(
     primary = dark_primary,
@@ -75,7 +73,9 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun ShikimoriTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    content:
+    @Composable()
+    () -> Unit,
 ) {
     val colors = if (!useDarkTheme) {
         LightColors
@@ -86,6 +86,6 @@ fun ShikimoriTheme(
     MaterialTheme(
         colorScheme = colors,
         typography = ShikimoriTypography,
-        content = content
+        content = content,
     )
 }

@@ -13,7 +13,7 @@ data class Manga(
     @SerialName("score") val score: String?,
     @SerialName("status") val status: String?,
     @SerialName("volumes") val volumes: Int?,
-    @SerialName("chapters") val chapters: Int?
+    @SerialName("chapters") val chapters: Int?,
 )
 
 @Serializable
@@ -21,5 +21,5 @@ data class Image(
     @SerialName("original") val original: String?,
     @SerialName("preview") val preview: String?,
     @SerialName("x96") val x96: String?,
-    @SerialName("x48") val x48: String?
+    @SerialName("x48") val x48: String?,
 )

@@ -1,11 +1,12 @@
 package com.majo.shikimori.home
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -50,7 +51,7 @@ fun HomeScreen() {
         systemUiController.run {
             setSystemBarsColor(
                 color = Color.Transparent,
-                darkIcons = isLight
+                darkIcons = isLight,
             )
         }
     }
@@ -64,19 +65,20 @@ fun HomeScreen() {
     ShikimoriTheme {
         Scaffold(
             bottomBar = {
-                if (showBottomBar)
+                if (showBottomBar) {
                     BottomNavigationBar(
                         modifier = Modifier
                             .height(76.dp),
-                        navController
+                        navController,
                     )
-            }
+                }
+            },
         ) { paddingValues ->
             HomeScreenNavigationConfigurations(
                 navController,
                 animeListScreenProvider,
                 mangaListScreenProvider,
-                paddingValues
+                paddingValues,
             )
         }
     }
@@ -87,12 +89,18 @@ private fun HomeScreenNavigationConfigurations(
     navController: NavHostController,
     animeListScreenProvider: AnimeListScreenProvider,
     mangaListScreenProvider: MangaListScreenProvider,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
 ) {
     Column(modifier = Modifier.padding(paddingValues)) {
         NavHost(
             navController = navController,
-            startDestination = NavigationItem.AnimeList.route
+            startDestination = NavigationItem.AnimeList.route,
+            enterTransition = {
+                EnterTransition.None
+            },
+            exitTransition = {
+                ExitTransition.None
+            },
         ) {
             animeListScreenProvider.animeListScreen(this, navController)
             mangaListScreenProvider.mangaListScreen(this, navController)
@@ -108,7 +116,7 @@ fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
     )
     NavigationBar(
         modifier = modifier,
-        contentColor = Color.White
+        contentColor = Color.White,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -128,7 +136,7 @@ fun BottomNavigationBar(modifier: Modifier, navController: NavController) {
                         launchSingleTop = true
                         restoreState = true
                     }
-                }
+                },
             )
         }
     }

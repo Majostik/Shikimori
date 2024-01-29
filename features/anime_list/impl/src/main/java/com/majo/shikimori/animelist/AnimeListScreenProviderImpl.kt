@@ -9,8 +9,8 @@ import com.majo.shikimori.navigation.NavigationItem
 import javax.inject.Inject
 
 class AnimeListScreenProviderImpl @Inject constructor(
-    private val animeDetailsScreenProvider: AnimeDetailsScreenProvider
-): AnimeListScreenProvider {
+    private val animeDetailsScreenProvider: AnimeDetailsScreenProvider,
+) : AnimeListScreenProvider {
 
     override fun animeListScreen(navGraphBuilder: NavGraphBuilder, navController: NavHostController) {
         navGraphBuilder.composable(NavigationItem.AnimeList.route) {
@@ -19,5 +19,4 @@ class AnimeListScreenProviderImpl @Inject constructor(
 
         animeDetailsScreenProvider.registerAnimeDetailsScreen(navGraphBuilder, navController)
     }
-
 }

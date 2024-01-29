@@ -7,5 +7,5 @@ import retrofit2.http.Query
 interface AnimeListApi {
 
     @GET("animes")
-    suspend fun getAnimes(@Query("page") page: Int, @Query("limit") limit: Int, @Query("search ") search : String?): List<Anime>
+    suspend fun getAnimes(@Query("page") page: Int, @Query("limit") limit: Int, @Query("search ") search: String?): List<Anime>
 }

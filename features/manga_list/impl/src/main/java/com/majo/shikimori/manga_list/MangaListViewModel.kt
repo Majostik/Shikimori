@@ -11,6 +11,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MangaListViewModel @Inject constructor(
     featureBuilder: MangaListFeatureBuilder,
-): MviViewModel<MangaListAction, MangaListState, MangaListOneTimeEvent>(
-    featureBuilder = featureBuilder
+) : MviViewModel<MangaListAction, MangaListState, MangaListOneTimeEvent>(
+    featureBuilder = featureBuilder,
 )

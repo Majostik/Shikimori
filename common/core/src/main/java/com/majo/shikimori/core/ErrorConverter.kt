@@ -11,8 +11,8 @@ interface ErrorConverter {
 }
 
 class ErrorConverterImpl @Inject constructor(
-    private val resources: Resources
-): ErrorConverter {
+    private val resources: Resources,
+) : ErrorConverter {
     override fun convertError(throwable: Throwable?): String {
         return if (throwable is UnknownHostException || throwable is SocketTimeoutException) {
             resources.getString(R.string.out_of_internet_error)
@@ -20,5 +20,4 @@ class ErrorConverterImpl @Inject constructor(
             resources.getString(R.string.unknown_error)
         }
     }
-
 }

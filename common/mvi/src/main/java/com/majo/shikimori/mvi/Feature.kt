@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 
-class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> constructor(
+class Feature<Action : Any, InternalAction : Any, State : Any, OneTimeEvent : Any> constructor(
     private val initialState: State,
     private val actor: Actor<Action, InternalAction, State>,
     private val eventProducer: OneTimeEventProducer<InternalAction, OneTimeEvent>,
-    private val reducer: Reducer<InternalAction, State>
-): AbstractFlow<State>(), FlowCollector<Action> {
+    private val reducer: Reducer<InternalAction, State>,
+) : AbstractFlow<State>(), FlowCollector<Action> {
     companion object {
         internal const val EVENTS_BUFFER = 16
         internal const val ACTIONS_BUFFER = 16
@@ -31,7 +31,7 @@ class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> c
         private set
 
     private val stateFlow: Flow<State> =
-            observeActor()
+        observeActor()
             .onEach { internalAction ->
                 produceEvent(internalAction)
             }
@@ -42,7 +42,6 @@ class Feature<Action: Any, InternalAction: Any, State: Any, OneTimeEvent: Any> c
                 emit(state)
             }
             .distinctUntilChanged()
-
 
     private fun observeActor(): Flow<InternalAction> {
         return actionsFlow

@@ -3,7 +3,6 @@
 package com.majo.shikimori.animelist
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,7 +17,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,21 +24,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -68,7 +62,6 @@ fun AnimeListScreen(navController: NavHostController) {
     val viewModel = hiltViewModel<AnimeListViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
-    viewModel.accept(AnimeListAction.Init)
 
     val lazyGridListState = rememberLazyGridState()
 
@@ -78,14 +71,19 @@ fun AnimeListScreen(navController: NavHostController) {
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.accept(AnimeListAction.Init)
+    }
+
     LaunchedEffect(shouldStartPaginate.value) {
-        if (shouldStartPaginate.value && !state.isLoading)
+        if (shouldStartPaginate.value && !state.isLoading) {
             viewModel.accept(AnimeListAction.LoadNextPage(page = state.page + 1))
+        }
     }
 
     LaunchedEffect(events) {
         events.collect { event ->
-            when(event) {
+            when (event) {
                 is AnimeListOneTimeEvent.ShowError -> {
                     Toast.makeText(context, event.error, Toast.LENGTH_SHORT).show()
                 }
@@ -105,42 +103,42 @@ fun AnimeListScreen(navController: NavHostController) {
                         Text(
                             text = stringResource(R.string.anime_list_title),
                             color = Color.Black,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
                     },
                     onSearchResult = {
                         viewModel.accept(AnimeListAction.Search(query = it))
-                    }
+                    },
                 )
-            }) {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-                    modifier = Modifier.padding(it),
-                    state = lazyGridListState
-                ) {
-                    items(state.animeList) {anime ->
-                        AnimeItem(anime) {
-                            viewModel.accept(AnimeListAction.OpenAnimeDetailsScreen(anime.id, anime.name))
-                        }
+            },
+        ) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+                modifier = Modifier.padding(it),
+                state = lazyGridListState,
+            ) {
+                items(state.animeList) { anime ->
+                    AnimeItem(anime) {
+                        viewModel.accept(AnimeListAction.OpenAnimeDetailsScreen(anime.id, anime.name))
                     }
                 }
             }
-
+        }
     }
 }
 
 @Composable
-fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
+fun AnimeItem(anime: Anime, onItemClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier
             .height(290.dp),
-        onClick = onItemClick
+        onClick = onItemClick,
     ) {
         Column {
             Box {
@@ -150,13 +148,13 @@ fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(200.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 )
-                if (anime.score != 0.0)
+                if (anime.score != 0.0) {
                     Box(
                         modifier = Modifier
                             .align(alignment = Alignment.BottomStart)
-                            .background(Color.Black.copy(alpha = 0.3f))
+                            .background(Color.Black.copy(alpha = 0.3f)),
                     ) {
                         Text(
                             text = anime.score.toString(),
@@ -166,6 +164,7 @@ fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
                                 .padding(4.dp),
                         )
                     }
+                }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -175,13 +174,13 @@ fun AnimeItem(anime: Anime, onItemClick:() -> Unit) {
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                modifier = Modifier.padding(horizontal = 8.dp),
             )
             Text(
                 text = anime.kind.toString(),
                 color = Color.Gray,
                 fontSize = 14.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                modifier = Modifier.padding(horizontal = 8.dp),
             )
             Spacer(modifier = Modifier.height(8.dp))
         }

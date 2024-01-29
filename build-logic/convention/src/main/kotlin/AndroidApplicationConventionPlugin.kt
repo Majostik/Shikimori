@@ -13,6 +13,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("com.android.application")
                 apply("kotlin-android")
                 apply("shikimori.android.hilt")
+                apply("shikimori.spotless")
             }
 
             withVersionCatalog { libs ->

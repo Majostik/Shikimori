@@ -3,9 +3,9 @@ package com.majo.shikimori.home.di
 import dagger.Component
 
 @Component(
-    dependencies = [HomeListDependencies::class]
+    dependencies = [HomeListDependencies::class],
 )
-interface HomeListComponent: HomeListDependencies {
+interface HomeListComponent : HomeListDependencies {
     @Component.Builder
     interface Builder {
         fun dependencies(appComponent: HomeListDependencies): Builder

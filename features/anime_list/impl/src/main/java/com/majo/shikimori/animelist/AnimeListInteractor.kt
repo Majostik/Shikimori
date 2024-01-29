@@ -1,8 +1,8 @@
 package com.majo.shikimori.animelist
 
-import com.majo.shikimori.core.ErrorConverter
 import com.majo.shikimori.animelist.mvi.AnimeListActor.Companion.INIT_PAGE
 import com.majo.shikimori.animelist.mvi.entity.AnimeListInternalAction
+import com.majo.shikimori.core.ErrorConverter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -14,9 +14,9 @@ interface AnimeListInteractor {
 
 class AnimeListInteractorImpl @Inject constructor(
     private val animeListApi: AnimeListApi,
-    private val errorConverter: ErrorConverter
-): AnimeListInteractor {
-    override fun loadAnime(page: Int, limit: Int, query : String?): Flow<AnimeListInternalAction> {
+    private val errorConverter: ErrorConverter,
+) : AnimeListInteractor {
+    override fun loadAnime(page: Int, limit: Int, query: String?): Flow<AnimeListInternalAction> {
         return flow {
             if (page == INIT_PAGE) {
                 emit(AnimeListInternalAction.FirstAnimeLoading)
@@ -29,5 +29,4 @@ class AnimeListInteractorImpl @Inject constructor(
             emit(AnimeListInternalAction.AnimeError(error = errorConverter.convertError(it)))
         }
     }
-
 }

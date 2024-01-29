@@ -14,9 +14,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -37,13 +37,13 @@ fun TopAppBarWithSearch(
         Row(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically,
-            content = actions
+            content = actions,
         )
     }
 
     Row(modifier = modifier.height(IntrinsicSize.Max)) {
         Box(
-            modifier =  Modifier.weight(1f).fillMaxHeight(),
+            modifier = Modifier.weight(1f).fillMaxHeight(),
             contentAlignment = Alignment.CenterStart,
         ) {
             when (expanded) {
@@ -54,7 +54,7 @@ fun TopAppBarWithSearch(
                     SearchBar(
                         onSearch = onSearchResult,
                         placeholder = placeholder,
-                        modifier = Modifier.focusRequester(focusRequester)
+                        modifier = Modifier.focusRequester(focusRequester),
                     )
                     LaunchedEffect(Unit) {
                         focusRequester.requestFocus()

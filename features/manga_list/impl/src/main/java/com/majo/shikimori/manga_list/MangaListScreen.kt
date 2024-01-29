@@ -24,7 +24,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -59,24 +58,27 @@ fun MangaListScreen(navController: NavHostController) {
     val viewModel = hiltViewModel<MangaListViewModel>()
     val state by viewModel.state.collectAsState()
     val events = viewModel.events
-    viewModel.accept(MangaListAction.Init)
 
     val lazyGridListState = rememberLazyGridState()
-
     val shouldStartPaginate = remember {
         derivedStateOf {
             !state.isLoading && (lazyGridListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -9) >= (lazyGridListState.layoutInfo.totalItemsCount - 6)
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.accept(MangaListAction.Init)
+    }
+
     LaunchedEffect(shouldStartPaginate.value) {
-        if (shouldStartPaginate.value && !state.isLoading)
+        if (shouldStartPaginate.value && !state.isLoading) {
             viewModel.accept(MangaListAction.LoadNextPage(page = state.page + 1))
+        }
     }
 
     LaunchedEffect(events) {
         events.collect { event ->
-            when(event) {
+            when (event) {
                 is MangaListOneTimeEvent.ShowError -> {
                     Toast.makeText(context, event.error, Toast.LENGTH_SHORT).show()
                 }
@@ -95,41 +97,41 @@ fun MangaListScreen(navController: NavHostController) {
                         Text(
                             text = stringResource(R.string.manga_title),
                             color = Color.Black,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
                     },
                     onSearchResult = {
                         viewModel.accept(MangaListAction.Search(query = it))
-                    }
+                    },
                 )
-            }) {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
-                    modifier = Modifier.padding(it),
-                    state = lazyGridListState
-                ) {
-                    items(state.mangaList) {manga ->
-                        MangaItem(manga) {
-                        }
+            },
+        ) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+                modifier = Modifier.padding(it),
+                state = lazyGridListState,
+            ) {
+                items(state.mangaList) { manga ->
+                    MangaItem(manga) {
                     }
                 }
             }
-
+        }
     }
 }
 
 @Composable
-fun MangaItem(manga: Manga, onItemClick:() -> Unit) {
+fun MangaItem(manga: Manga, onItemClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier
             .height(310.dp),
-        onClick = onItemClick
+        onClick = onItemClick,
     ) {
         Column {
             Box {
@@ -139,12 +141,12 @@ fun MangaItem(manga: Manga, onItemClick:() -> Unit) {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(200.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 )
                 Box(
                     modifier = Modifier
                         .align(alignment = Alignment.BottomStart)
-                        .background(Color.Black.copy(alpha = 0.3f))
+                        .background(Color.Black.copy(alpha = 0.3f)),
                 ) {
                     Text(
                         text = manga.score.toString(),
@@ -163,13 +165,13 @@ fun MangaItem(manga: Manga, onItemClick:() -> Unit) {
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                modifier = Modifier.padding(horizontal = 8.dp),
             )
             Text(
                 text = manga.kind.toString(),
                 color = Color.Gray,
                 fontSize = 14.sp,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                modifier = Modifier.padding(horizontal = 8.dp),
             )
             Spacer(modifier = Modifier.height(8.dp))
         }

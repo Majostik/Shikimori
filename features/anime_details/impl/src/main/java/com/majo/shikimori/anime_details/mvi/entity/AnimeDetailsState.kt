@@ -8,7 +8,7 @@ data class AnimeDetailsState(
 ) {
     companion object {
         val INITIAL = AnimeDetailsState(
-            LoadableState.Loading()
+            LoadableState.Loading(),
         )
     }
 }

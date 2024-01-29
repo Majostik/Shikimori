@@ -5,10 +5,9 @@ import com.majo.shikimori.animelist.mvi.entity.AnimeListOneTimeEvent
 import com.majo.shikimori.mvi.OneTimeEventProducer
 import javax.inject.Inject
 
-class AnimeListOneTimeEventReducer @Inject constructor(
-): OneTimeEventProducer<AnimeListInternalAction, AnimeListOneTimeEvent> {
+class AnimeListOneTimeEventReducer @Inject constructor() : OneTimeEventProducer<AnimeListInternalAction, AnimeListOneTimeEvent> {
     override fun produce(internalAction: AnimeListInternalAction): AnimeListOneTimeEvent? {
-        return when(internalAction) {
+        return when (internalAction) {
             is AnimeListInternalAction.AnimeError -> AnimeListOneTimeEvent.ShowError(internalAction.error)
             is AnimeListInternalAction.OpenScreen -> AnimeListOneTimeEvent.OpenScreen(internalAction.id, internalAction.name)
             else -> null

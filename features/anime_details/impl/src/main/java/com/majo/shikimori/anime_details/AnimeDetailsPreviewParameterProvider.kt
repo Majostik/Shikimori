@@ -16,7 +16,7 @@ class AnimeDetailsPreviewParameterProvider : PreviewParameterProvider<AnimeDetai
                 score = 1.5,
                 status = "test",
                 episodes = 1,
-                genres = mutableListOf()
-            )
+                genres = mutableListOf(),
+            ),
         )
 }

@@ -14,8 +14,8 @@ interface MangaListInteractor {
 
 class MangaListInteractorImpl @Inject constructor(
     private val aangaListApi: MangaListApi,
-    private val errorConverter: ErrorConverter
-): MangaListInteractor {
+    private val errorConverter: ErrorConverter,
+) : MangaListInteractor {
     override fun loadManga(page: Int, limit: Int, query: String?): Flow<MangaListInternalAction> {
         return flow {
             if (page == INIT_PAGE) {
@@ -29,5 +29,4 @@ class MangaListInteractorImpl @Inject constructor(
             emit(MangaListInternalAction.MangaError(error = errorConverter.convertError(it)))
         }
     }
-
 }

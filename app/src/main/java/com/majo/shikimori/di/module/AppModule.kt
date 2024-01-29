@@ -2,7 +2,6 @@ package com.majo.shikimori.di.module
 
 import android.content.Context
 import android.content.res.Resources
-import com.majo.shikimori.App
 import com.majo.shikimori.core.ErrorConverter
 import com.majo.shikimori.core.ErrorConverterImpl
 import dagger.Binds
@@ -28,7 +27,5 @@ open class AppModule {
         @Binds
         @Singleton
         fun providesErrorConverter(errorConverter: ErrorConverterImpl): ErrorConverter
-
     }
-
 }

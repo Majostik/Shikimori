@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AnimeDetailsArgs(
     val id: Long,
-    val name: String
+    val name: String,
 ) : Parcelable

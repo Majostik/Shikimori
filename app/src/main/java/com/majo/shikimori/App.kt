@@ -7,12 +7,10 @@ import com.majo.shikimori.di.DependenciesManager
 import com.majo.shikimori.di.component.AppEntryPoint
 import dagger.hilt.EntryPoints
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
 @HiltAndroidApp
-class App: Application(), HasComponentDependencies {
+class App : Application(), HasComponentDependencies {
 
     override val dependencies: ComponentDependenciesProvider
         get() = DependenciesManager.getDependencies(EntryPoints.get(this, AppEntryPoint::class.java))
-
 }

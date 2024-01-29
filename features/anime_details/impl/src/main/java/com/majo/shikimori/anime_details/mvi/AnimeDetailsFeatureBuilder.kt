@@ -11,12 +11,12 @@ import javax.inject.Inject
 class AnimeDetailsFeatureBuilder @Inject constructor(
     reducer: AnimeDetailsReducer,
     actor: AnimeDetailsActor,
-    oneTimeEventReducer: AnimeDetailsOneTimeEventReducer
-): FeatureBuilder<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState, AnimeDetailsOneTimeEvent>(
+    oneTimeEventReducer: AnimeDetailsOneTimeEventReducer,
+) : FeatureBuilder<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState, AnimeDetailsOneTimeEvent>(
     initialState = INITIAL,
     setupFunc = {
-            withActor(actor)
+        withActor(actor)
             .withReducer(reducer)
             .withEventReducer(oneTimeEventReducer)
-    }
+    },
 )

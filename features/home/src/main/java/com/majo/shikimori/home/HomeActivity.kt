@@ -14,5 +14,4 @@ class HomeActivity : AppCompatActivity() {
             HomeScreen()
         }
     }
-
 }

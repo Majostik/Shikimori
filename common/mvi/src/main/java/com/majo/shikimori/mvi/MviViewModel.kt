@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-abstract class MviViewModel<Action: Any, State: Any, OneTimeEvent: Any>(
+abstract class MviViewModel<Action : Any, State : Any, OneTimeEvent : Any>(
     private val featureBuilder: FeatureBuilder<Action, *, State, OneTimeEvent>,
-    private val sharingStateStrategy: SharingStarted = ConfigurationChangeSharingStrategy
-): ViewModel() {
+    private val sharingStateStrategy: SharingStarted = ConfigurationChangeSharingStrategy,
+) : ViewModel() {
 
     private val feature by lazy {
         featureBuilder.build()
