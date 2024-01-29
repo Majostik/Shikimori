@@ -12,6 +12,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("kotlin-android")
                 apply("kotlin-parcelize")
+                apply("shikimori.spotless")
             }
 
             withVersionCatalog {libs ->

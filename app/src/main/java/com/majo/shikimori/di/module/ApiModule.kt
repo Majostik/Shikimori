@@ -19,7 +19,7 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): Retrofit {
         val contentType = "application/json".toMediaType()
         val json = Json { ignoreUnknownKeys = true }
@@ -30,7 +30,6 @@ object ApiModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -38,5 +37,4 @@ object ApiModule {
             addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         }.build()
     }
-
 }

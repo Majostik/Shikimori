@@ -23,7 +23,7 @@ interface HasComponentDependencies {
 annotation class ComponentDependenciesKey(val value: KClass<out ComponentDependencies>)
 
 @Suppress("UNCHECKED_CAST")
-fun <T: ComponentDependencies> getDependencies(clazz: Class<T>, dependencyHolder: HasComponentDependencies): T {
+fun <T : ComponentDependencies> getDependencies(clazz: Class<T>, dependencyHolder: HasComponentDependencies): T {
     val dependencies = dependencyHolder.dependencies.get(clazz) as? T
     return dependencies ?: throw IllegalStateException("Missing Dependency")
 }
@@ -43,7 +43,7 @@ fun Activity.findComponentDependenciesProvider(): HasComponentDependencies {
     return findComponentDependenciesProvider(this.application)
 }
 
-inline fun <reified T: Any> T.findComponentDependenciesProvider(context: Context): HasComponentDependencies {
+inline fun <reified T : Any> T.findComponentDependenciesProvider(context: Context): HasComponentDependencies {
     val appContext = context.applicationContext
     return when {
         this is HasComponentDependencies -> this

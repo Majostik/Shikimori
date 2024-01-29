@@ -6,7 +6,7 @@ data class AnimeListState(
     val animeList: List<Anime>,
     val page: Int,
     val isLoading: Boolean,
-    val query: String? = null
+    val query: String? = null,
 ) {
     companion object {
         val INITIAL = AnimeListState(

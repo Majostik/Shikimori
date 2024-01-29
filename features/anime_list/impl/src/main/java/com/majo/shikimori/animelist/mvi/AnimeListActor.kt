@@ -12,21 +12,20 @@ import javax.inject.Inject
 
 class AnimeListActor @Inject constructor(
     private val interactor: AnimeListInteractor,
-): Actor<AnimeListAction, AnimeListInternalAction, AnimeListState> {
+) : Actor<AnimeListAction, AnimeListInternalAction, AnimeListState> {
     override fun process(
         action: AnimeListAction,
-        previousState: AnimeListState
-    ): Flow<AnimeListInternalAction> = when(action){
+        previousState: AnimeListState,
+    ): Flow<AnimeListInternalAction> = when (action) {
         is AnimeListAction.Retry, is AnimeListAction.Init -> interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
         is AnimeListAction.LoadNextPage -> interactor.loadAnime(page = action.page, limit = DEFAULT_LIMIT, query = previousState.query)
         is AnimeListAction.Search -> merge(
             flow { emit(AnimeListInternalAction.Clear) },
-            interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = action.query)
+            interactor.loadAnime(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = action.query),
         )
         is AnimeListAction.OpenAnimeDetailsScreen -> flow {
             emit(AnimeListInternalAction.OpenScreen(action.id, action.name))
         }
-
     }
 
     companion object {

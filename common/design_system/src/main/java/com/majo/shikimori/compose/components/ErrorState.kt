@@ -15,14 +15,14 @@ import androidx.compose.ui.res.stringResource
 import com.majo.shikimori.design_system.R
 
 @Composable
-fun ErrorState(error: String, paddingValues: PaddingValues, onRetryClick:() -> Unit) {
+fun ErrorState(error: String, paddingValues: PaddingValues, onRetryClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
             .padding(paddingValues),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = error)
         Button(onClick = { onRetryClick() }) {

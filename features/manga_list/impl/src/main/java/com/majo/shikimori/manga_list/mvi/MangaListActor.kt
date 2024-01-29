@@ -12,16 +12,16 @@ import javax.inject.Inject
 
 class MangaListActor @Inject constructor(
     private val interactor: MangaListInteractor,
-): Actor<MangaListAction, MangaListInternalAction, MangaListState> {
+) : Actor<MangaListAction, MangaListInternalAction, MangaListState> {
     override fun process(
         action: MangaListAction,
-        previousState: MangaListState
-    ): Flow<MangaListInternalAction> = when(action){
+        previousState: MangaListState,
+    ): Flow<MangaListInternalAction> = when (action) {
         is MangaListAction.Retry, is MangaListAction.Init -> interactor.loadManga(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = previousState.query)
         is MangaListAction.LoadNextPage -> interactor.loadManga(page = action.page, limit = DEFAULT_LIMIT, query = previousState.query)
         is MangaListAction.Search -> merge(
             flow { emit(MangaListInternalAction.Clear) },
-            interactor.loadManga(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = action.query)
+            interactor.loadManga(page = INIT_PAGE, limit = DEFAULT_LIMIT, query = action.query),
         )
     }
 

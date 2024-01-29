@@ -11,11 +11,11 @@ import javax.inject.Inject
 
 class AnimeDetailsActor @Inject constructor(
     private val interactor: AnimeDetailsInteractor,
-): Actor<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState> {
+) : Actor<AnimeDetailsAction, AnimeDetailsInternalAction, AnimeDetailsState> {
     override fun process(
         action: AnimeDetailsAction,
-        previousState: AnimeDetailsState
-    ): Flow<AnimeDetailsInternalAction> = when(action){
+        previousState: AnimeDetailsState,
+    ): Flow<AnimeDetailsInternalAction> = when (action) {
         is AnimeDetailsAction.Back -> flow {
             emit(AnimeDetailsInternalAction.Close)
         }
@@ -23,5 +23,4 @@ class AnimeDetailsActor @Inject constructor(
             interactor.getAnimeDetails(action.id)
         }
     }
-
 }

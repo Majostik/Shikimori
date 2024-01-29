@@ -6,16 +6,14 @@ import androidx.navigation.compose.composable
 import com.majo.shikimori.navigation.NavigationItem
 import javax.inject.Inject
 
-class MangaListScreenProviderImpl @Inject constructor(
-): MangaListScreenProvider {
+class MangaListScreenProviderImpl @Inject constructor() : MangaListScreenProvider {
 
     override fun mangaListScreen(
         navGraphBuilder: NavGraphBuilder,
-        navController: NavHostController
+        navController: NavHostController,
     ) {
         navGraphBuilder.composable(NavigationItem.MangaList.route) {
             MangaListScreen(navController)
         }
     }
-
 }

@@ -19,7 +19,7 @@ fun LoadingState(paddingValues: PaddingValues) {
             .fillMaxWidth()
             .padding(paddingValues),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CircularProgressIndicator()
     }

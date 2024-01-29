@@ -8,7 +8,7 @@ import com.majo.shikimori.home.di.HomeListDependencies
 import com.majo.shikimori.manga_list.di.MangaListDependencies
 
 object DependenciesManager {
-    
+
     fun getDependencies(appEntryPoint: AppEntryPoint): Map<Class<out ComponentDependencies>, @JvmSuppressWildcards ComponentDependencies> {
         return buildMap<Class<out ComponentDependencies>, @JvmSuppressWildcards ComponentDependencies> {
             this[AnimeListDependencies::class.java] = appEntryPoint

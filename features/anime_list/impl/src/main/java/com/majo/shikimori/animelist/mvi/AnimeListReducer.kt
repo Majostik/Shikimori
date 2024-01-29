@@ -5,12 +5,12 @@ import com.majo.shikimori.animelist.mvi.entity.AnimeListState
 import com.majo.shikimori.mvi.Reducer
 import javax.inject.Inject
 
-class AnimeListReducer @Inject constructor(): Reducer<AnimeListInternalAction, AnimeListState> {
+class AnimeListReducer @Inject constructor() : Reducer<AnimeListInternalAction, AnimeListState> {
     override fun reduce(
         internalAction: AnimeListInternalAction,
-        previousState: AnimeListState
+        previousState: AnimeListState,
     ): AnimeListState {
-        return when(internalAction) {
+        return when (internalAction) {
             is AnimeListInternalAction.Clear -> {
                 AnimeListState.INITIAL
             }
@@ -19,7 +19,7 @@ class AnimeListReducer @Inject constructor(): Reducer<AnimeListInternalAction, A
                     animeList = previousState.animeList + internalAction.anime,
                     page = previousState.page + 1,
                     isLoading = false,
-                    query = internalAction.query
+                    query = internalAction.query,
                 )
             }
             is AnimeListInternalAction.AnimeLoading, is AnimeListInternalAction.FirstAnimeLoading -> {

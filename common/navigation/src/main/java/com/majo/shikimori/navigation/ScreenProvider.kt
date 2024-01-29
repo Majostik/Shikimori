@@ -5,5 +5,4 @@ import androidx.navigation.NavHostController
 
 interface ScreenProvider {
     fun register(navGraphBuilder: NavGraphBuilder, navController: NavHostController)
-
 }

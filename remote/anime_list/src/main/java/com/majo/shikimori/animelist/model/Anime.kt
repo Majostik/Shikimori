@@ -12,7 +12,7 @@ data class Anime(
     @SerialName("kind") val kind: String?,
     @SerialName("score") val score: Double?,
     @SerialName("status") val status: String?,
-    @SerialName("episodes") val episodes: Int?
+    @SerialName("episodes") val episodes: Int?,
 )
 
 @Serializable
@@ -20,5 +20,5 @@ data class Image(
     @SerialName("original") val original: String?,
     @SerialName("preview") val preview: String?,
     @SerialName("x96") val x96: String?,
-    @SerialName("x48") val x48: String?
+    @SerialName("x48") val x48: String?,
 )

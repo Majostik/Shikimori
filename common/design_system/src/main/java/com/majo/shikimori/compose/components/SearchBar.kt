@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 fun SearchBar(
     onSearch: (String?) -> Unit,
     placeholder: @Composable () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var text by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -40,21 +40,21 @@ fun SearchBar(
         modifier = modifier,
         singleLine = true,
         textStyle = TextStyle(
-            fontSize = 18.sp
+            fontSize = 18.sp,
         ),
         keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Done,
         ),
         keyboardActions = KeyboardActions(
             onDone = {
                 onSearch.invoke(text.ifEmpty { null })
                 keyboardController?.hide()
-            }
+            },
         ),
         decorationBox = { innerTextField ->
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             ) {
                 if (text.isEmpty()) {
                     placeholder()
@@ -63,6 +63,6 @@ fun SearchBar(
                 Spacer(modifier = Modifier.height(2.dp))
                 Divider(color = Color.Black, thickness = 1.dp)
             }
-        }
+        },
     )
 }

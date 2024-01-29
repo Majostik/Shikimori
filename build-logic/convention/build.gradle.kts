@@ -19,6 +19,7 @@ dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
     implementation(libs.kotlinGradle)
     implementation(libs.buildGradle)
+    implementation(libs.spotless.gradlePlugin)
     compileOnly(libs.kspGradle)
 
 }
@@ -59,6 +60,10 @@ gradlePlugin {
         register("remoteApi") {
             id = "shikimori.remote.api"
             implementationClass = "RemoteApiConventionPlugin"
+        }
+        register("spotless") {
+            id = "shikimori.spotless"
+            implementationClass = "SpotlessPlugin"
         }
     }
 }

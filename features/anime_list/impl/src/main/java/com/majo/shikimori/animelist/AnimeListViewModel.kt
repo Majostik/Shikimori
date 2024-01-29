@@ -11,6 +11,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AnimeListViewModel @Inject constructor(
     featureBuilder: AnimeListFeatureBuilder,
-): MviViewModel<AnimeListAction, AnimeListState, AnimeListOneTimeEvent>(
-    featureBuilder = featureBuilder
+) : MviViewModel<AnimeListAction, AnimeListState, AnimeListOneTimeEvent>(
+    featureBuilder = featureBuilder,
 )
